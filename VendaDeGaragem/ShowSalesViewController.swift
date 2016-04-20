@@ -7,12 +7,12 @@
 //
 
 import UIKit
+import MapKit
 import Firebase
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class ShowSalesViewController: UIViewController, MKMapViewDelegate {
 
-    @IBOutlet weak var campoDeTexto: UITextField!
-    @IBOutlet weak var botaoEnviar: UIButton!
+    @IBOutlet weak var mapView: MKMapView!
      // Create a reference to a Firebase location
     let myRootRef = Firebase(url:"https://vendadegaragem.firebaseio.com")
     
@@ -57,9 +57,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // Write data to Firebase
         vendasRef.setValue(vendas)
    
-        myRootRef.updateChildValues([
-            "users/user1/vendas/venda3/status": "\(campoDeTexto.text!)",
-            ])
+//        myRootRef.updateChildValues([
+//            "users/user1/vendas/venda3/status": "\(campoDeTexto.text!)",
+//            ])
         
         
         //myRootRef.setValue()

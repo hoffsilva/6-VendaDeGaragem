@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Show Sales View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="VendaDeGaragem" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ShowSalesViewController" customModule="VendaDeGaragem" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="X2h-lU-c1O">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="X2h-lU-c1O">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="OG9-Q6-L80"/>
@@ -32,14 +32,55 @@
                             <constraint firstAttribute="trailing" secondItem="X2h-lU-c1O" secondAttribute="trailing" id="gmr-mm-WKY"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="kgp-ru-oKA">
-                        <barButtonItem key="leftBarButtonItem" title="Vendas" id="Xir-0z-eKc"/>
-                        <barButtonItem key="rightBarButtonItem" title="Login" id="VS5-k4-0aM"/>
-                    </navigationItem>
+                    <tabBarItem key="tabBarItem" title="" id="z1y-87-Hqz"/>
+                    <navigationItem key="navigationItem" id="kgp-ru-oKA"/>
+                    <connections>
+                        <outlet property="mapView" destination="X2h-lU-c1O" id="wCV-JA-PZm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="424" y="658"/>
+            <point key="canvasLocation" x="22" y="641"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="QpM-zn-01h">
+            <objects>
+                <viewController id="PJu-e7-0Vx" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="FjB-BH-QlF"/>
+                        <viewControllerLayoutGuide type="bottom" id="EIb-Bf-0Z4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ko2-VV-beQ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" id="72o-Hr-ehL"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CQH-vE-3Ui" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="15" y="1292"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="AvR-dF-ZbO">
+            <objects>
+                <tabBarController id="Jdt-ya-Ns2" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="74r-zm-JDt">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="tEZ-KF-2yF"/>
+                    </navigationItem>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="moB-bF-Ugp">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="Emw-vH-Kde"/>
+                        <segue destination="PJu-e7-0Vx" kind="relationship" relationship="viewControllers" id="5nU-aR-IuE"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vaj-c6-OBf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-721" y="986"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="bCp-pl-kMJ">
@@ -50,12 +91,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Lw0-aN-RoM"/>
+                        <segue destination="Jdt-ya-Ns2" kind="relationship" relationship="rootViewController" id="i1E-YV-ge1"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0cf-l2-ARt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-272" y="650"/>
+            <point key="canvasLocation" x="-1438" y="962"/>
         </scene>
     </scenes>
 </document>
