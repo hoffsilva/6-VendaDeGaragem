@@ -26,6 +26,9 @@
                                 <rect key="frame" x="173" y="285" width="254" height="30"/>
                                 <color key="backgroundColor" red="0.79890193839337464" green="1" blue="0.61424706780666383" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Enviar"/>
+                                <connections>
+                                    <action selector="enviar:" destination="BYZ-38-t0r" eventType="touchUpInside" id="d1n-RA-35P"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -38,6 +41,10 @@
                             <constraint firstItem="HQN-lb-SPB" firstAttribute="centerX" secondItem="NSA-bi-fyY" secondAttribute="centerX" id="nlB-3z-Vt6"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="botaoEnviar" destination="HQN-lb-SPB" id="orY-K6-lJq"/>
+                        <outlet property="campoDeTexto" destination="NSA-bi-fyY" id="zm9-IK-9VN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
