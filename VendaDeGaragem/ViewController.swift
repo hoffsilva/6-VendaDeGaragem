@@ -13,16 +13,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var campoDeTexto: UITextField!
     @IBOutlet weak var botaoEnviar: UIButton!
+     // Create a reference to a Firebase location
     let myRootRef = Firebase(url:"https://vendadegaragem.firebaseio.com")
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
-        // Create a reference to a Firebase location
-       
-        // Write data to Firebase
-       // myRootRef.setValue("Do you have data? You'll love Firebase.")
         
         // Read data and react to changes
         myRootRef.observeEventType(.Value, withBlock: {
@@ -30,34 +26,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
             print("\(snapshot.key) -> \(snapshot.value)")
             print(snapshot)
         })
-        
-        
-        /*
-        
-        Venda:
-        EnviarLocalização
-        A localização será definida pelo endereço do que o usuário cadastrar ou, se ele permitir, pela localização do aparelho.
-        EnviarEndereço
-        Definição do endereço da venda.
-        EnviarTitulo
-        
-        EnviarMaior Preco
-        EnviarMenor Preco
-        EnviarData
-        EnviarHorario de Inicio e fim.
-        EnviarForma de pagamento
-        As formas de pagamento serão: Cartao de debito, Crédito, Dinheiro ou cheque, será definido pelo vendedor.
-        EnviarResponsável
-        Nome do responsável pela venda.
-        EnviarQuantidade de Produtos
-        EnviarPreço total dos Produtos
-        EnviarPreço total de produtos vendidos
-        EnviarStatus - Encerrada- Icone Cinza, Iniciada - Icone Amarelo, Não iniciada - Icone Verde
-        EnviarCada venda terá um annotationview com o Titulo e um ícone para detalhar.
-        
-        
-        
-        */
         
 //        let user1 = ["nome" : "hoff silva"]
 //        
@@ -86,6 +54,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         let vendas = ["venda1" : gs1, "venda2" : gs2, "venda3" : gs3 ]
         
+        // Write data to Firebase
         vendasRef.setValue(vendas)
    
         myRootRef.updateChildValues([
