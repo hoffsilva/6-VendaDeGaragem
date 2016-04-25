@@ -21,6 +21,7 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
     
     
   
+    @IBOutlet weak var testeItem: UINavigationItem!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,10 +31,9 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
         
         let loginFace = FBSDKLoginButton()
         
+        let barButton = UIBarButtonItem(customView: loginFace)
         
-        
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: "", action: "")
-        
+        self.testeItem.rightBarButtonItem = barButton
         
         
         // Read data and react to changes

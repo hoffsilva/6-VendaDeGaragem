@@ -35,10 +35,10 @@ class LoginViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         
         
-        let add = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addTapped")
-        let play = UIBarButtonItem(title: "Play", style: .Plain, target: self, action: "addTapped")
-        
-        navigationItem.leftBarButtonItems = [add, play]
+//        let add = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addTapped")
+//        let play = UIBarButtonItem(title: "Play", style: .Plain, target: self, action: "addTapped")
+//        
+//        navigationItem.leftBarButtonItems = [add, play]
     }
     /*
     // MARK: - Navigation

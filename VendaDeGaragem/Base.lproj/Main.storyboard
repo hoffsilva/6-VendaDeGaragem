@@ -23,7 +23,7 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="OG9-Q6-L80"/>
                                 </connections>
                             </mapView>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RCt-6V-uys">
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RCt-6V-uys">
                                 <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <items>
                                     <navigationItem id="wE5-z2-aFJ"/>
@@ -46,6 +46,7 @@
                     <connections>
                         <outlet property="mapView" destination="X2h-lU-c1O" id="wCV-JA-PZm"/>
                         <outlet property="navbar" destination="RCt-6V-uys" id="TB1-Gj-Xpi"/>
+                        <outlet property="testeItem" destination="wE5-z2-aFJ" id="nN7-gK-PFW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -64,12 +65,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="svo-oh-x1M">
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="svo-oh-x1M">
                                 <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <items>
-                                    <navigationItem title="Minhas Vendas" id="ahc-xo-aQx">
-                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="qt1-km-AYc"/>
-                                    </navigationItem>
+                                    <navigationItem title="Minhas Vendas" id="ahc-xo-aQx"/>
                                 </items>
                             </navigationBar>
                         </subviews>
