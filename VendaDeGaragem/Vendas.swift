@@ -19,6 +19,8 @@ class Vendas: NSObject {
     var responsavel : String!
     var status : String!
     
+    var arrayDeVendas = [Vendas]()
+    
     init(data : String, endereco: String, forma_pagamento : String, hora_inicio: String, hora_termino: String, nome: String, responsavel: String, status: String) {
         
         self.data = data

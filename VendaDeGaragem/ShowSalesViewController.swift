@@ -19,15 +19,85 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
      // Create a reference to a Firebase location
     let myRootRef = Firebase(url:"https://vendadegaragem.firebaseio.com")
     
+    var parseConvenience = ParseConvenience()
+    var latituteOfLocation = 0.0
+    var longitudeOfLocation = 0.0
     
+    let dropPin = MKPointAnnotation()
+
   
     @IBOutlet weak var testeItem: UINavigationItem!
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ParseConvenience.gettingUsers { (networkConectionError) in
-            print(UsersSingleton.arrayOfUsers)
-        }
+        parseConvenience.gettingVendas({ (networkConectionError) in
+            if networkConectionError == true{
+                let alert = UIAlertController(title: ":(", message: "Internet conection was lost or server is offline!", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+                //self.overlayView.removeFromSuperview()
+                return
+                
+            }else{
+               // var i = 0
+                for venda in VendasSingleton.arrayDeVendas {
+                    // print("\(student.firstName) \(student.mapString)")
+                    print(venda.endereco)
+                    
+                    let geoCoder = CLGeocoder()
+                    let locationString = "\(venda.endereco)"
+                    geoCoder.geocodeAddressString(locationString, completionHandler: {(placemarks: [CLPlacemark]?, error: NSError?) -> Void in
+                        guard error == nil else{
+                            let alert = UIAlertController(title: ";)", message: "Your location could not be finded!", preferredStyle: UIAlertControllerStyle.Alert)
+                            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                            self.presentViewController(alert, animated: true, completion: nil)
+                            //self.activityIndicator.hidden = true
+                            return
+                        }
+                        // self.studentLocationExists()
+                       // if placemarks?.count > 0 {
+                            let placemark = placemarks?[0]
+                            let location = placemark?.location
+                            let coordinate = location?.coordinate
+                            //  print("\nlat: \(coordinate!.latitude), long: \(coordinate!.longitude)")
+                            self.latituteOfLocation = coordinate!.latitude
+                            self.longitudeOfLocation = coordinate!.longitude
+                            
+                            self.dropPin.title = "Title"
+                            self.dropPin.subtitle = "subtitle"
+                            self.dropPin.coordinate = coordinate!
+                            print(coordinate!)
+                            var region = MKCoordinateRegion()
+                            region.center = coordinate!
+                            self.mapView.addAnnotation(self.dropPin)
+                            //self.textField_Location.hidden = true
+                            //self.textField_Link.hidden = false
+                            //self.mapView_LocationFinded.hidden = false
+                            //self.buttonFindOnTheMap.hidden = true
+                            //self.button_Submit.hidden = false
+                            //self.mapView.setRegion(region, animated: true)
+                            //self.activityIndicator.hidden = true
+                        //}
+                    })
+                    
+                    self.mapView.reloadInputViews()
+//                    let annotation = MKPointAnnotation()
+//                    annotation.coordinate = student.coordinate
+//                    annotation.title = "\(student.firstName) \(student.lastName)"
+//                    annotation.subtitle = student.mediaURL
+//                    // Finally we place the annotation in an array of annotations.
+//                    annotations.append(annotation)
+                    //i = i+1
+                }
+                
+                // When the array is complete, we add the annotations to the map.
+//                self.mapa.addAnnotations(annotations)
+//                self.mapa.setCenterCoordinate(self.mapa.region.center, animated: true)
+//                self.overlayView.removeFromSuperview()
+            }
+                print(VendasSingleton.arrayDeVendas)
+        })
+        
         
         let loginFace = FBSDKLoginButton()
         

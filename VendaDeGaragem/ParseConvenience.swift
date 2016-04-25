@@ -10,45 +10,47 @@ import UIKit
 
 class ParseConvenience: NSObject {
     
-   static func gettingUsers(onCompletion: (networkConectionError : Bool) ->()){
+    func gettingVendas(onCompletion: (networkConectionError : Bool) ->()){
        // curl "https://vendadegaragem.firebaseio.com/users.json"
-        let request = NSMutableURLRequest(URL: NSURL(string: "https://vendadegaragem.firebaseio.com/users.json")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://vendadegaragem.firebaseio.com/users/user1.json")!)
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error == nil { // Handle error...
                 let parsedResult: AnyObject!
                 do {
                     parsedResult = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments)
-                } catch {
+                    } catch {
                     parsedResult = nil
                     return
                 }
                 
-                if let arrayOfResults = parsedResult["users"] as?[[String:AnyObject]]{
-                    //StudentsSingleton.arrayOfStudents.removeAll()
-                     var arrayDeVendas = Array<Vendas>()
+                
+                    print(parsedResult)
+                    print(parsedResult.allKeys)
+                    print(parsedResult["vendas"].dynamicType)
+                if let arrayOfVendas = parsedResult["vendas"] as? [String:AnyObject]{
                     
-                    if let arrayOfVendas = parsedResult["vendas"] as? [[String:AnyObject]]{
-                       
+                        //print(arrayOfVendas)
+                    
+                    
+                        var i=1
+                    
                         for vendas in arrayOfVendas{
-                            let venda = Vendas(data: (vendas["data"] as? String)!, endereco: (vendas["endereco"] as? String)!, forma_pagamento: (vendas["forma_pagamento"] as? String)!, hora_inicio: (vendas["hora_inicio"] as? String)!, hora_termino: (vendas["hora_termino"] as? String)!, nome: (vendas["nome"] as? String)!, responsavel: (vendas["responsavel"] as! String), status: (vendas["status"] as? String)!)
-                            arrayDeVendas.append(venda)
+                            var venda = String(format: "venda%d", i)
+                            if let vendaCurrent = vendas.1 as? [String:AnyObject]{
+                                VendasSingleton.arrayDeVendas.append(Vendas(data: (vendaCurrent["data"] as? String)!, endereco: (vendaCurrent["endereco"] as? String)!, forma_pagamento: (vendaCurrent["forma_pagamento"] as? String)!, hora_inicio: (vendaCurrent["hora_inicio"] as? String)!, hora_termino: (vendaCurrent["hora_termino"] as? String)!, nome: (vendaCurrent["nome"] as? String)!, responsavel: (vendaCurrent["responsavel"] as! String), status: (vendaCurrent["status"] as? String)!))
+                                i = i+1
+                            }
+                            
                         }
                     }
+ 
                     
-                    for user in arrayOfResults{
-                        UsersSingleton.arrayOfUsers.append(UserModel(nome: user["nome"] as! String, vendas: arrayDeVendas))
-                    }
-                    
+
                     dispatch_async(dispatch_get_main_queue(), { () -> Void in
                         onCompletion(networkConectionError: false)
                     })
-                }else{
-                    
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        onCompletion(networkConectionError: true)
-                    })
-                }
+
             }else{
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     onCompletion(networkConectionError: true)
