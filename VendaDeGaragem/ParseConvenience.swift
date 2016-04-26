@@ -25,14 +25,7 @@ class ParseConvenience: NSObject {
                 }
                 
                 
-                    print(parsedResult)
-                    print(parsedResult.allKeys)
-                    print(parsedResult["vendas"].dynamicType)
                 if let arrayOfVendas = parsedResult["vendas"] as? [String:AnyObject]{
-                    
-                        //print(arrayOfVendas)
-                    
-                    
                         var i=1
                     
                         for vendas in arrayOfVendas{
