@@ -83,10 +83,6 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="PJu-e7-0Vx" id="B49-ag-ngu"/>
-                                    <outlet property="delegate" destination="PJu-e7-0Vx" id="yKv-Si-1bA"/>
-                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
