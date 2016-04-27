@@ -16,6 +16,7 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var navItem: UINavigationItem!
     @IBOutlet weak var mapView: MKMapView!
+    let buttonFacebook = UIButton()
      // Create a reference to a Firebase location
     let myRootRef = Firebase(url:"https://vendadegaragem.firebaseio.com")
     
@@ -29,8 +30,8 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //putSalesOnMap()
-        drawFacebbokButtonOnNavItem()
+        putSalesOnMap()
+     verifyIfUserIslogged()
         
         
         
@@ -56,10 +57,75 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    func drawFacebbokButtonOnNavItem(){
-        let loginFace = FBSDKLoginButton()
-        let barButtonFacebook = UIBarButtonItem(customView: loginFace)
-        self.navItem.rightBarButtonItem = barButtonFacebook
+    
+    
+    func drawFacebbokButtonOnNavItem(size : Bool){
+        buttonFacebook.frame = CGRectMake(0, 0, 0, 0)
+        if size == true {
+            buttonFacebook.setImage(UIImage(named: "facebookOnline"), forState: .Normal)
+            buttonFacebook.addTarget(self, action: #selector(loginButtonClicked), forControlEvents: .TouchDown)
+            buttonFacebook.sizeToFit()
+            let barButtonFacebook = UIBarButtonItem(customView: buttonFacebook)
+            self.navItem.rightBarButtonItem = barButtonFacebook
+        }else{
+            buttonFacebook.setImage(UIImage(named: "facebookOffline"), forState: .Normal)
+            buttonFacebook.addTarget(self, action: #selector(loginButtonClicked), forControlEvents: .TouchDown)
+            buttonFacebook.sizeToFit()
+            let barButtonFacebook = UIBarButtonItem(customView: buttonFacebook)
+            self.navItem.rightBarButtonItem = barButtonFacebook
+        }
+    }
+    
+    func loginButtonClicked() {
+        
+        let login = FBSDKLoginManager()
+        
+        if(FBSDKAccessToken.currentAccessToken() == nil)
+        {
+            login.logInWithReadPermissions(["public_profile"], fromViewController: self) { ( flmlr, error) in
+                if ((error) != nil) {
+                    NSLog("Process error");
+                } else if (flmlr.isCancelled) {
+                    NSLog("Cancelled");
+                } else {
+                    NSLog("Logged in");
+                    print(flmlr.description)
+                    self.drawFacebbokButtonOnNavItem(true)
+                }
+            }
+            
+        }else{
+            
+            login.logOut()
+            drawFacebbokButtonOnNavItem(false)
+        }
+        
+    }
+    
+    func verifyIfUserIslogged(){
+        if(FBSDKAccessToken.currentAccessToken() == nil)
+        {
+            drawFacebbokButtonOnNavItem(false)
+            
+            print("not logged in")
+        }
+        else{
+            print("logged in already")
+            let req = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"id"], HTTPMethod: "GET")
+            req.startWithCompletionHandler({ (connection, result, error : NSError!) -> Void in
+                if(error == nil)
+                {
+                    print("result \(result)")
+                }
+                else
+                {
+                    print("error \(error)")
+                }
+            })
+            
+            drawFacebbokButtonOnNavItem(true)
+        }
+        
     }
 
     func putSalesOnMap() {
@@ -76,37 +142,21 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
                 
                 for venda in VendasSingleton.arrayDeVendas {
                     // print("\(student.firstName) \(student.mapString)")
-                    print(venda.endereco)
                     
-                    let geoCoder = CLGeocoder()
-                    let locationString = "\(venda.endereco)"
-                    geoCoder.geocodeAddressString(locationString, completionHandler: {(placemarks: [CLPlacemark]?, error: NSError?) -> Void in
-                        if error == nil{
-                            let alert = UIAlertController(title: ";)", message: "Your location could not be finded! \(venda.endereco)", preferredStyle: UIAlertControllerStyle.Alert)
-                            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-                            self.presentViewController(alert, animated: true, completion: nil)
-                            
-                            return
-                        }else{
-                        
-                        let placemark = placemarks?[0]
-                        let location = placemark?.location
-                        let coordinate = location?.coordinate
-                        self.latituteOfLocation = coordinate!.latitude
-                        self.longitudeOfLocation = coordinate!.longitude
-                        self.dropPin.title = "Title"
-                        self.dropPin.subtitle = "subtitle"
-                        self.dropPin.coordinate = coordinate!
-                        var region = MKCoordinateRegion()
-                        region.center = coordinate!
-                        self.annotations.append(self.dropPin)
-                        print(self.annotations)
-                        }
-                        
-                    })
-                    
-                    print(geoCoder)
+                    let annotation = MKPointAnnotation()
+                    var coordinates = CLLocationCoordinate2D()
+                    coordinates.latitude = venda.latitude as CLLocationDegrees
+                    coordinates.longitude = venda.longitude as CLLocationDegrees
+                    annotation.coordinate = coordinates
+                    annotation.title = "\(venda.nome) \(venda.data)"
+                    //annotation.subtitle = student.mediaURL
+                    // Finally we place the annotation in an array of annotations.
+                    self.annotations.append(annotation)
+
                 }
+                self.mapView.addAnnotations(self.annotations)
+                //self.mapa.setCenterCoordinate(self.mapa.region.center, animated: true)
+                //self.overlayView.removeFromSuperview()
             
                 
             }

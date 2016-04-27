@@ -19,6 +19,7 @@ class ParseConvenience: NSObject {
                 let parsedResult: AnyObject!
                 do {
                     parsedResult = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments)
+                    print(parsedResult)
                     } catch {
                     parsedResult = nil
                     return
@@ -31,7 +32,15 @@ class ParseConvenience: NSObject {
                         for vendas in arrayOfVendas{
                             var venda = String(format: "venda%d", i)
                             if let vendaCurrent = vendas.1 as? [String:AnyObject]{
-                                VendasSingleton.arrayDeVendas.append(Vendas(data: (vendaCurrent["data"] as? String)!, endereco: (vendaCurrent["endereco"] as? String)!, forma_pagamento: (vendaCurrent["forma_pagamento"] as? String)!, hora_inicio: (vendaCurrent["hora_inicio"] as? String)!, hora_termino: (vendaCurrent["hora_termino"] as? String)!, nome: (vendaCurrent["nome"] as? String)!, responsavel: (vendaCurrent["responsavel"] as! String), status: (vendaCurrent["status"] as? String)!))
+                                VendasSingleton.arrayDeVendas.append(
+                                    Vendas(data: (vendaCurrent["data"] as? String)!,
+                                    latitude: (vendaCurrent["latitude"] as? NSNumber)!,
+                                    longitude: (vendaCurrent["longitude"] as? NSNumber)!,
+                                    forma_pagamento: (vendaCurrent["forma_pagamento"] as? String)!,
+                                    hora_inicio: (vendaCurrent["hora_inicio"] as? String)!,
+                                    hora_termino: (vendaCurrent["hora_termino"] as? String)!,
+                                    nome: (vendaCurrent["nome"] as? String)!,
+                                    status: (vendaCurrent["status"] as? String)!))
                                 i = i+1
                             }
                             

@@ -31,13 +31,6 @@ class UserViewController: UIViewController {
 
     override func viewWillAppear(animated: Bool) {
        verifyIfUserIslogged()
-        
-        
-        //addButton()
-//        let add = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addTapped")
-//        let play = UIBarButtonItem(title: "Play", style: .Plain, target: self, action: "addTapped")
-//        
-//        navigationItem.leftBarButtonItems = [add, play]
     }
     
     func drawFacebbokButtonOnNavItem(size : Bool){
@@ -85,16 +78,6 @@ class UserViewController: UIViewController {
         
     }
     
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     func addButton() {
         self.navItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addVenda:")

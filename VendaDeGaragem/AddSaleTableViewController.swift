@@ -13,6 +13,10 @@ class AddSaleTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        //navigationController?.navigationBar.hidden = false
+        let navBar =  UINavigationBar()
+        
+        view.addSubview(navBar)
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -37,7 +41,7 @@ class AddSaleTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return 8
     }
 
     /*
