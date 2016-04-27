@@ -14,7 +14,7 @@ class UserViewController: UIViewController {
 
     
     
-    @IBOutlet weak var navItem: UINavigationItem!
+   @IBOutlet weak var navItem: UINavigationItem!
     let buttonFacebook = UIButton()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +40,7 @@ class UserViewController: UIViewController {
             buttonFacebook.addTarget(self, action: #selector(loginButtonClicked), forControlEvents: .TouchDown)
             buttonFacebook.sizeToFit()
             let barButtonFacebook = UIBarButtonItem(customView: buttonFacebook)
+            self.navigationController?.navigationItem.leftBarButtonItem = barButtonFacebook
             self.navItem.leftBarButtonItem = barButtonFacebook
             addButton()
         }else{
