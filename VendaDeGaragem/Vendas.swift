@@ -10,28 +10,6 @@ import UIKit
 
 class Vendas: NSObject {
     
-    /*
-     data:
-     
-     forma_pagamento:
-     
-     hora_inicio:
-     
-     hora_termino:
-     
-     id:
-     
-     latitude:
-    
-     longitude:
-     
-     nome:
-     
-     status: 
-     
-     
-     */
-    
     var data : String!
     var latitude: NSNumber!
     var longitude: NSNumber!
@@ -40,10 +18,11 @@ class Vendas: NSObject {
     var hora_termino : String!
     var nome : String!
     var status : String!
+    var id : NSNumber!
     
     var arrayDeVendas = [Vendas]()
     
-    init(data : String, latitude: NSNumber, longitude: NSNumber, forma_pagamento : String, hora_inicio: String, hora_termino: String, nome: String, status: String) {
+    init(data : String, latitude: NSNumber, longitude: NSNumber, forma_pagamento : String, hora_inicio: String, hora_termino: String, nome: String, status: String, id: NSNumber) {
         
         self.data = data
         self.latitude = latitude
@@ -53,6 +32,7 @@ class Vendas: NSObject {
         self.hora_termino = hora_termino
         self.nome = nome
         self.status = status
+        self.id = id
     }
 
 }

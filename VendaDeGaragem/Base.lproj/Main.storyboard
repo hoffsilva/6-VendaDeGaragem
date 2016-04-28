@@ -6,7 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Show Sales View Controller-->
+        <!--Vendas Publicadas-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ShowSalesViewController" customModule="VendaDeGaragem" customModuleProvider="target" sceneMemberID="viewController">
@@ -43,7 +43,7 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" id="z1y-87-Hqz"/>
-                    <navigationItem key="navigationItem" id="zdi-tj-tuJ"/>
+                    <navigationItem key="navigationItem" title="Vendas Publicadas" id="zdi-tj-tuJ"/>
                     <connections>
                         <outlet property="mapView" destination="X2h-lU-c1O" id="wCV-JA-PZm"/>
                         <outlet property="navItem" destination="kgp-ru-oKA" id="uLr-1k-CTF"/>
@@ -53,43 +53,178 @@
             </objects>
             <point key="canvasLocation" x="456" y="561"/>
         </scene>
-        <!--User View Controller-->
-        <scene sceneID="QpM-zn-01h">
+        <!--User Table View Controller-->
+        <scene sceneID="ygo-QL-Y4s">
             <objects>
-                <viewController id="PJu-e7-0Vx" customClass="UserViewController" customModule="VendaDeGaragem" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="FjB-BH-QlF"/>
-                        <viewControllerLayoutGuide type="bottom" id="EIb-Bf-0Z4"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ko2-VV-beQ">
+                <tableViewController id="2Aj-GO-oj4" customClass="UserTableViewController" customModule="VendaDeGaragem" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" id="YMP-4t-jzn">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="svo-oh-x1M">
-                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
-                                <items>
-                                    <navigationItem title="Minhas Vendas" id="ahc-xo-aQx"/>
-                                </items>
-                            </navigationBar>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="svo-oh-x1M" firstAttribute="leading" secondItem="ko2-VV-beQ" secondAttribute="leading" id="4Y7-ZA-fAM"/>
-                            <constraint firstItem="svo-oh-x1M" firstAttribute="top" secondItem="ko2-VV-beQ" secondAttribute="top" constant="20" id="Jhe-2j-uTC"/>
-                            <constraint firstAttribute="trailing" secondItem="svo-oh-x1M" secondAttribute="trailing" id="iPZ-Wu-UIv"/>
-                        </constraints>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="" id="72o-Hr-ehL"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="vendaCell" rowHeight="80" id="0Kl-ao-1lD" customClass="VendaTableViewCell" customModule="VendaDeGaragem" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="600" height="80"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0Kl-ao-1lD" id="pu1-bJ-YYH">
+                                    <rect key="frame" x="0.0" y="0.0" width="553" height="79"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="facebookOnline" translatesAutoresizingMaskIntoConstraints="NO" id="3Wj-5q-3yl">
+                                            <rect key="frame" x="8" y="25" width="30" height="30"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ahe-TQ-1ih">
+                                            <rect key="frame" x="40" y="15" width="130" height="50"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="130" id="Lyw-Yf-cbN"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PLZ-0Y-ReR">
+                                            <rect key="frame" x="178" y="29" width="100" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="100" id="Lw9-Vb-b5d"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="ahe-TQ-1ih" firstAttribute="leading" secondItem="3Wj-5q-3yl" secondAttribute="trailing" constant="10" id="2KJ-jb-tcR"/>
+                                        <constraint firstItem="3Wj-5q-3yl" firstAttribute="leading" secondItem="pu1-bJ-YYH" secondAttribute="leading" constant="8" id="38V-8L-XoK"/>
+                                        <constraint firstAttribute="bottom" secondItem="PLZ-0Y-ReR" secondAttribute="bottom" constant="29" id="5nu-dC-tfg"/>
+                                        <constraint firstAttribute="bottom" secondItem="ahe-TQ-1ih" secondAttribute="bottom" constant="14" id="7Xo-XO-fdp"/>
+                                        <constraint firstItem="ahe-TQ-1ih" firstAttribute="top" secondItem="pu1-bJ-YYH" secondAttribute="top" constant="15" id="KC5-hi-06u"/>
+                                        <constraint firstAttribute="bottom" secondItem="3Wj-5q-3yl" secondAttribute="bottom" constant="24" id="TtH-t7-lPe"/>
+                                        <constraint firstItem="PLZ-0Y-ReR" firstAttribute="leading" secondItem="ahe-TQ-1ih" secondAttribute="trailing" constant="8" id="YTe-Mh-ExR"/>
+                                        <constraint firstItem="PLZ-0Y-ReR" firstAttribute="top" secondItem="pu1-bJ-YYH" secondAttribute="top" constant="29" id="fOJ-Tt-sP6"/>
+                                        <constraint firstItem="3Wj-5q-3yl" firstAttribute="top" secondItem="pu1-bJ-YYH" secondAttribute="top" constant="25" id="jA7-6I-k84"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="imageStatus" destination="pu1-bJ-YYH" id="Yoy-8F-DJI"/>
+                                    <outlet property="labelData" destination="PLZ-0Y-ReR" id="JGh-5k-xjP"/>
+                                    <outlet property="labelNome" destination="ahe-TQ-1ih" id="TTX-xk-zSz"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="2Aj-GO-oj4" id="TaL-TU-90a"/>
+                            <outlet property="delegate" destination="2Aj-GO-oj4" id="m26-7X-aNs"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="ALx-hJ-LAb"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="navItem" destination="ahc-xo-aQx" id="zp6-XT-KYy"/>
-                        <segue destination="4eO-SX-Icu" kind="show" identifier="addVenda" id="lUC-di-ZId"/>
+                        <outlet property="navItem" destination="ALx-hJ-LAb" id="ZnY-cx-oyp"/>
+                        <segue destination="4eO-SX-Icu" kind="show" identifier="addVenda" id="WX0-xa-mp4"/>
+                        <segue destination="iIh-1L-7ja" kind="show" identifier="detalhaVenda" id="O8b-Ne-t33"/>
                     </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CQH-vE-3Ui" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KVI-Ej-vI5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="373" y="1305"/>
+            <point key="canvasLocation" x="217" y="1700"/>
         </scene>
-        <!--Add Sale Table View Controller-->
+        <!--Table View Controller-->
+        <scene sceneID="iOK-FN-IQE">
+            <objects>
+                <tableViewController id="iIh-1L-7ja" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="pGS-Vf-ouw">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <sections>
+                            <tableViewSection id="0Ym-HA-WVX">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="kBH-tS-OYs">
+                                        <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kBH-tS-OYs" id="Ltz-hy-qq6">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="4uM-Zv-OP9">
+                                        <rect key="frame" x="0.0" y="108" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4uM-Zv-OP9" id="V5W-PX-ThY">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="1hh-DO-p7i">
+                                        <rect key="frame" x="0.0" y="152" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1hh-DO-p7i" id="z0T-0P-usg">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="GJx-0a-dhu">
+                                        <rect key="frame" x="0.0" y="196" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GJx-0a-dhu" id="OUr-fN-cDd">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ubO-4k-xlZ">
+                                        <rect key="frame" x="0.0" y="240" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ubO-4k-xlZ" id="61O-Mi-s2r">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="eii-KC-zOH">
+                                        <rect key="frame" x="0.0" y="284" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eii-KC-zOH" id="WU7-Vn-4dT">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="0Wm-dW-ER1">
+                                        <rect key="frame" x="0.0" y="328" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0Wm-dW-ER1" id="Lis-CU-VPr">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="iIh-1L-7ja" id="gu7-N5-Pl3"/>
+                            <outlet property="delegate" destination="iIh-1L-7ja" id="C9g-nZ-yJ9"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ew4-f8-5Mf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1056" y="2237"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="8iX-Ez-wE3">
+            <objects>
+                <navigationController id="Yyf-Ot-Pcw" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="rxf-hP-830"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="BsK-9f-AUu">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="2Aj-GO-oj4" kind="relationship" relationship="rootViewController" id="psq-A6-BDe"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="agb-XF-mLp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-695" y="1791"/>
+        </scene>
+        <!--Add Venda-->
         <scene sceneID="z9z-z5-ytB">
             <objects>
                 <tableViewController id="3EG-XW-jBC" customClass="AddSaleTableViewController" customModule="VendaDeGaragem" customModuleProvider="target" sceneMemberID="viewController">
@@ -115,7 +250,7 @@
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Sua venda precisa de um nome!" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cq5-ZR-h9x">
                                                     <rect key="frame" x="8" y="42" width="584" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -299,6 +434,9 @@
                                                     <state key="normal" title="Publicar">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="publicarVenda:" destination="3EG-XW-jBC" eventType="touchUpInside" id="Hwu-9Z-k0H"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -325,13 +463,21 @@
                             <outlet property="delegate" destination="3EG-XW-jBC" id="1aM-CD-qJ2"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="EBn-1M-5OT">
+                    <navigationItem key="navigationItem" title="Add Venda" id="EBn-1M-5OT">
                         <barButtonItem key="rightBarButtonItem" title="Cancelar" id="LvT-9Z-29J">
                             <connections>
                                 <action selector="cancelar:" destination="3EG-XW-jBC" id="vv2-ib-zPy"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="aceitaCartao" destination="UCw-re-mT7" id="wAA-DX-7UR"/>
+                        <outlet property="datePickerData" destination="7Km-Bz-AtQ" id="ffR-3K-CbO"/>
+                        <outlet property="datePickerHoraInicio" destination="q17-Xf-6np" id="rGV-uU-15L"/>
+                        <outlet property="datePickerHoraTermino" destination="riC-VB-mPg" id="mRP-sI-Xbg"/>
+                        <outlet property="pickerStatus" destination="HXk-Lg-jCE" id="tCQ-Kd-v1z"/>
+                        <outlet property="textFieldNome" destination="cq5-ZR-h9x" id="cNm-Ce-BMr"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KAf-Eg-gk3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -365,7 +511,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="b3i-Av-En0" kind="relationship" relationship="viewControllers" id="zaE-Ol-ByP"/>
-                        <segue destination="PJu-e7-0Vx" kind="relationship" relationship="viewControllers" id="2a4-a9-DIv"/>
+                        <segue destination="Yyf-Ot-Pcw" kind="relationship" relationship="viewControllers" id="YuC-Tk-Eml"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vaj-c6-OBf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -390,4 +536,7 @@
             <point key="canvasLocation" x="-554" y="594"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="facebookOnline" width="22" height="22"/>
+    </resources>
 </document>

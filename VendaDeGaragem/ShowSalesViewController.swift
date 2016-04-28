@@ -30,8 +30,8 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        putSalesOnMap()
-     verifyIfUserIslogged()
+        
+     
         
         
         
@@ -55,6 +55,11 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        putSalesOnMap()
+        verifyIfUserIslogged()
     }
     
     
@@ -89,7 +94,6 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
                     NSLog("Cancelled");
                 } else {
                     NSLog("Logged in");
-                    print(flmlr.description)
                     self.drawFacebbokButtonOnNavItem(true)
                 }
             }

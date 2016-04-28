@@ -8,13 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		0B0FE4B01CCA8FDC00D327ED /* ParseConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0FE4AF1CCA8FDC00D327ED /* ParseConvenience.swift */; };
-		0B0FE4B21CCA92C200D327ED /* UsersSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0FE4B11CCA92C200D327ED /* UsersSingleton.swift */; };
-		0B0FE4B41CCA92F500D327ED /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0FE4B31CCA92F500D327ED /* UserModel.swift */; };
 		0B0FE4B61CCA942000D327ED /* Vendas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0FE4B51CCA942000D327ED /* Vendas.swift */; };
+		0B898EC31CD17FC100359F3B /* VendaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B898EC21CD17FC100359F3B /* VendaTableViewCell.swift */; };
+		0B898EC51CD193C400359F3B /* VendasSingletonOfUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B898EC41CD193C400359F3B /* VendasSingletonOfUser.swift */; };
 		0BCBE7EF1CCBA34300A918D8 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BCBE7EC1CCBA34300A918D8 /* FBSDKCoreKit.framework */; };
 		0BCBE7F01CCBA34300A918D8 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BCBE7ED1CCBA34300A918D8 /* FBSDKLoginKit.framework */; };
 		0BCBE7F11CCBA34300A918D8 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BCBE7EE1CCBA34300A918D8 /* FBSDKShareKit.framework */; };
-		0BCBE7F31CCBB43B00A918D8 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCBE7F21CCBB43B00A918D8 /* UserViewController.swift */; };
+		0BCBE7F31CCBB43B00A918D8 /* UserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCBE7F21CCBB43B00A918D8 /* UserTableViewController.swift */; };
 		0BCBE7F51CCE583100A918D8 /* VendasSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCBE7F41CCE583100A918D8 /* VendasSingleton.swift */; };
 		0BCBE7F91CD01A3E00A918D8 /* AddSaleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCBE7F81CD01A3E00A918D8 /* AddSaleTableViewController.swift */; };
 		0BEDDEC21CB59DE000F04FE9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BEDDEC11CB59DE000F04FE9 /* AppDelegate.swift */; };
@@ -27,13 +27,13 @@
 
 /* Begin PBXFileReference section */
 		0B0FE4AF1CCA8FDC00D327ED /* ParseConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseConvenience.swift; sourceTree = "<group>"; };
-		0B0FE4B11CCA92C200D327ED /* UsersSingleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersSingleton.swift; sourceTree = "<group>"; };
-		0B0FE4B31CCA92F500D327ED /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		0B0FE4B51CCA942000D327ED /* Vendas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vendas.swift; sourceTree = "<group>"; };
+		0B898EC21CD17FC100359F3B /* VendaTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VendaTableViewCell.swift; sourceTree = "<group>"; };
+		0B898EC41CD193C400359F3B /* VendasSingletonOfUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VendasSingletonOfUser.swift; sourceTree = "<group>"; };
 		0BCBE7EC1CCBA34300A918D8 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "Diversos/FacebookSDKs-iOS-20160412/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		0BCBE7ED1CCBA34300A918D8 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "Diversos/FacebookSDKs-iOS-20160412/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
 		0BCBE7EE1CCBA34300A918D8 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "Diversos/FacebookSDKs-iOS-20160412/FBSDKShareKit.framework"; sourceTree = "<group>"; };
-		0BCBE7F21CCBB43B00A918D8 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		0BCBE7F21CCBB43B00A918D8 /* UserTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewController.swift; sourceTree = "<group>"; };
 		0BCBE7F41CCE583100A918D8 /* VendasSingleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VendasSingleton.swift; sourceTree = "<group>"; };
 		0BCBE7F81CD01A3E00A918D8 /* AddSaleTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSaleTableViewController.swift; sourceTree = "<group>"; };
 		0BEDDEBE1CB59DE000F04FE9 /* VendaDeGaragem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VendaDeGaragem.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -91,12 +91,12 @@
 				0BEDDECA1CB59DE000F04FE9 /* LaunchScreen.storyboard */,
 				0BEDDECD1CB59DE000F04FE9 /* Info.plist */,
 				0B0FE4AF1CCA8FDC00D327ED /* ParseConvenience.swift */,
-				0B0FE4B11CCA92C200D327ED /* UsersSingleton.swift */,
-				0B0FE4B31CCA92F500D327ED /* UserModel.swift */,
 				0B0FE4B51CCA942000D327ED /* Vendas.swift */,
-				0BCBE7F21CCBB43B00A918D8 /* UserViewController.swift */,
+				0BCBE7F21CCBB43B00A918D8 /* UserTableViewController.swift */,
 				0BCBE7F41CCE583100A918D8 /* VendasSingleton.swift */,
 				0BCBE7F81CD01A3E00A918D8 /* AddSaleTableViewController.swift */,
+				0B898EC21CD17FC100359F3B /* VendaTableViewCell.swift */,
+				0B898EC41CD193C400359F3B /* VendasSingletonOfUser.swift */,
 			);
 			path = VendaDeGaragem;
 			sourceTree = "<group>";
@@ -244,15 +244,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0BCBE7F31CCBB43B00A918D8 /* UserViewController.swift in Sources */,
-				0B0FE4B21CCA92C200D327ED /* UsersSingleton.swift in Sources */,
+				0BCBE7F31CCBB43B00A918D8 /* UserTableViewController.swift in Sources */,
+				0B898EC31CD17FC100359F3B /* VendaTableViewCell.swift in Sources */,
 				0BEDDEC41CB59DE000F04FE9 /* ShowSalesViewController.swift in Sources */,
 				0BCBE7F91CD01A3E00A918D8 /* AddSaleTableViewController.swift in Sources */,
 				0B0FE4B01CCA8FDC00D327ED /* ParseConvenience.swift in Sources */,
 				0BCBE7F51CCE583100A918D8 /* VendasSingleton.swift in Sources */,
-				0B0FE4B41CCA92F500D327ED /* UserModel.swift in Sources */,
 				0B0FE4B61CCA942000D327ED /* Vendas.swift in Sources */,
 				0BEDDEC21CB59DE000F04FE9 /* AppDelegate.swift in Sources */,
+				0B898EC51CD193C400359F3B /* VendasSingletonOfUser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,6 +375,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.udacity.hoffsilva.VendaDeGaragem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -394,6 +395,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.udacity.hoffsilva.VendaDeGaragem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

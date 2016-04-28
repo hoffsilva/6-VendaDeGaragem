@@ -8,18 +8,24 @@
 
 import UIKit
 
-class AddSaleTableViewController: UITableViewController {
+class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDelegate {
 
     @IBAction func cancelar(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    @IBOutlet weak var textFieldNome: UITextField!
+    
+    @IBOutlet weak var datePickerData: UIDatePicker!
+    @IBOutlet weak var datePickerHoraInicio: UIDatePicker!
+    @IBOutlet weak var datePickerHoraTermino: UIDatePicker!
+    @IBOutlet weak var aceitaCartao: UISwitch!
+    @IBOutlet weak var pickerStatus: UIPickerView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
         //navigationController?.navigationBar.hidden = false
-        let navBar =  UINavigationBar()
-        
-        view.addSubview(navBar)
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -28,6 +34,17 @@ class AddSaleTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
+    func textFieldDidEndEditing(textField: UITextField) {
+        
+    }
+    
+    @IBAction func publicarVenda(sender: AnyObject) {
+        
+        print(datePickerData.date)
+        print(datePickerHoraInicio.date)
+        print(datePickerHoraTermino.calendar)
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
     
 
     override func didReceiveMemoryWarning() {
