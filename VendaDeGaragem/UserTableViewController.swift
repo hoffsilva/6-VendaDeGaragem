@@ -54,10 +54,10 @@ class UserTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let app = UIApplication.sharedApplication()
         actionDetailVenda()
-        //if let toOpen = studentsModel[indexPath.row].mediaURL {
+//        if let toOpen = studentsModel[indexPath.row].mediaURL {
 //        tableView.deselectRowAtIndexPath(indexPath, animated: true)
 //        app.openURL(NSURL(string: "\(StudentsSingleton.arrayOfStudents[indexPath.row].mediaURL)")!)
-        // }
+//         }
         
     }
     
@@ -111,10 +111,11 @@ class UserTableViewController: UITableViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "detalhaVenda"{
-//            let indexPaths = tableView.indexPathForSelectedRow
-//            let indexPath = indexPaths![0] as! NSIndexPath
-//            let detailPhoto : DetailPhotoViewController = segue.destinationViewController as! DetailPhotoViewController
-//            detailPhoto.photo = photos[indexPath.row]
+            let indexPaths = tableView.indexPathForSelectedRow
+            //let indexPath = indexPaths![0] as! NSIndexPath
+            let detalhaVenda : DetalhVendaTableViewController = segue.destinationViewController as! DetalhVendaTableViewController
+            print(VendasSingletonOfUser.arrayDeVendasDoUsuario[(indexPaths?.row)!])
+            detalhaVenda.venda = VendasSingletonOfUser.arrayDeVendasDoUsuario[(indexPaths?.row)!]
 //            print(photos[indexPath.row])
             print("Detalhou!")
         }

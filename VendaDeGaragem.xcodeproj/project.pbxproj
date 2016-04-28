@@ -11,6 +11,7 @@
 		0B0FE4B61CCA942000D327ED /* Vendas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0FE4B51CCA942000D327ED /* Vendas.swift */; };
 		0B898EC31CD17FC100359F3B /* VendaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B898EC21CD17FC100359F3B /* VendaTableViewCell.swift */; };
 		0B898EC51CD193C400359F3B /* VendasSingletonOfUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B898EC41CD193C400359F3B /* VendasSingletonOfUser.swift */; };
+		0B898EC71CD29FD800359F3B /* DetalhVendaTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B898EC61CD29FD800359F3B /* DetalhVendaTableViewController.swift */; };
 		0BCBE7EF1CCBA34300A918D8 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BCBE7EC1CCBA34300A918D8 /* FBSDKCoreKit.framework */; };
 		0BCBE7F01CCBA34300A918D8 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BCBE7ED1CCBA34300A918D8 /* FBSDKLoginKit.framework */; };
 		0BCBE7F11CCBA34300A918D8 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BCBE7EE1CCBA34300A918D8 /* FBSDKShareKit.framework */; };
@@ -30,6 +31,7 @@
 		0B0FE4B51CCA942000D327ED /* Vendas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vendas.swift; sourceTree = "<group>"; };
 		0B898EC21CD17FC100359F3B /* VendaTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VendaTableViewCell.swift; sourceTree = "<group>"; };
 		0B898EC41CD193C400359F3B /* VendasSingletonOfUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VendasSingletonOfUser.swift; sourceTree = "<group>"; };
+		0B898EC61CD29FD800359F3B /* DetalhVendaTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetalhVendaTableViewController.swift; sourceTree = "<group>"; };
 		0BCBE7EC1CCBA34300A918D8 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "Diversos/FacebookSDKs-iOS-20160412/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		0BCBE7ED1CCBA34300A918D8 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "Diversos/FacebookSDKs-iOS-20160412/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
 		0BCBE7EE1CCBA34300A918D8 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "Diversos/FacebookSDKs-iOS-20160412/FBSDKShareKit.framework"; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 				0BCBE7F81CD01A3E00A918D8 /* AddSaleTableViewController.swift */,
 				0B898EC21CD17FC100359F3B /* VendaTableViewCell.swift */,
 				0B898EC41CD193C400359F3B /* VendasSingletonOfUser.swift */,
+				0B898EC61CD29FD800359F3B /* DetalhVendaTableViewController.swift */,
 			);
 			path = VendaDeGaragem;
 			sourceTree = "<group>";
@@ -250,6 +253,7 @@
 				0BCBE7F91CD01A3E00A918D8 /* AddSaleTableViewController.swift in Sources */,
 				0B0FE4B01CCA8FDC00D327ED /* ParseConvenience.swift in Sources */,
 				0BCBE7F51CCE583100A918D8 /* VendasSingleton.swift in Sources */,
+				0B898EC71CD29FD800359F3B /* DetalhVendaTableViewController.swift in Sources */,
 				0B0FE4B61CCA942000D327ED /* Vendas.swift in Sources */,
 				0BEDDEC21CB59DE000F04FE9 /* AppDelegate.swift in Sources */,
 				0B898EC51CD193C400359F3B /* VendasSingletonOfUser.swift in Sources */,
