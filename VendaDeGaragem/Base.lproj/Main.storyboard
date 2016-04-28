@@ -125,7 +125,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KVI-Ej-vI5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="217" y="1700"/>
+            <point key="canvasLocation" x="223" y="1382"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="iOK-FN-IQE">
@@ -408,6 +408,10 @@
                                                 </label>
                                                 <pickerView contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HXk-Lg-jCE">
                                                     <rect key="frame" x="0.0" y="32" width="600" height="87"/>
+                                                    <connections>
+                                                        <outlet property="dataSource" destination="3EG-XW-jBC" id="CZ5-7H-nhD"/>
+                                                        <outlet property="delegate" destination="3EG-XW-jBC" id="Tj4-k3-Xht"/>
+                                                    </connections>
                                                 </pickerView>
                                             </subviews>
                                             <constraints>
@@ -481,7 +485,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KAf-Eg-gk3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1926" y="1305"/>
+            <point key="canvasLocation" x="2055" y="1305"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="rc0-6Q-nf6">

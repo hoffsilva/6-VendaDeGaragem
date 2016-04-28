@@ -8,7 +8,9 @@
 
 import UIKit
 
-class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDelegate {
+class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    var statusVenda = [String]()
 
     @IBAction func cancelar(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -24,6 +26,7 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        statusVenda = ["Iniciada", "Prevista", "Encerrada"]
 
         //navigationController?.navigationBar.hidden = false
         
@@ -43,6 +46,8 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
         print(datePickerData.date)
         print(datePickerHoraInicio.date)
         print(datePickerHoraTermino.calendar)
+        
+        
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -62,6 +67,18 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return 8
+    }
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return statusVenda.count
+    }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return statusVenda[row]
     }
 
     /*
