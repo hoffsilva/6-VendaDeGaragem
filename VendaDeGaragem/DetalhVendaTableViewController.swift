@@ -60,8 +60,10 @@ class DetalhVendaTableViewController: UITableViewController, MKMapViewDelegate {
     func addPinOnMap() {
         let annotation = MKPointAnnotation()
         var coordinates = CLLocationCoordinate2D()
-        coordinates.latitude = venda.latitude as CLLocationDegrees
-        coordinates.longitude = venda.longitude as CLLocationDegrees
+        let lat = Double(venda.latitude)!
+        let long = Double(venda.longitude)!
+        coordinates.latitude = lat as CLLocationDegrees
+        coordinates.longitude = long as CLLocationDegrees
         annotation.coordinate = coordinates
         var region = MKCoordinateRegion()
         region.center = annotation.coordinate

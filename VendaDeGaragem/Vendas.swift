@@ -11,18 +11,18 @@ import UIKit
 class Vendas: NSObject {
     
     var data : String!
-    var latitude: NSNumber!
-    var longitude: NSNumber!
+    var latitude: String!
+    var longitude: String!
     var forma_pagamento : String!
     var hora_inicio : String!
     var hora_termino : String!
     var nome : String!
     var status : String!
-    var id : NSNumber!
+    var id : String!
     
     var arrayDeVendas = [Vendas]()
     
-    init(data : String, latitude: NSNumber, longitude: NSNumber, forma_pagamento : String, hora_inicio: String, hora_termino: String, nome: String, status: String, id: NSNumber) {
+    init(data : String, latitude: String, longitude: String, forma_pagamento : String, hora_inicio: String, hora_termino: String, nome: String, status: String, id: String) {
         
         self.data = data
         self.latitude = latitude

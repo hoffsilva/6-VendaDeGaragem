@@ -8,9 +8,10 @@
 
 import UIKit
 import MapKit
-import Firebase
+//import Firebase
 import FBSDKCoreKit
 import FBSDKLoginKit
+
 
 class ShowSalesViewController: UIViewController, MKMapViewDelegate {
 
@@ -18,7 +19,7 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     let buttonFacebook = UIButton()
      // Create a reference to a Firebase location
-    let myRootRef = Firebase(url:"https://vendadegaragem.firebaseio.com")
+    
     
     var parseConvenience = ParseConvenience()
     var latituteOfLocation = 0.0
@@ -31,8 +32,10 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
         
         
-     
         
+        
+     
+       
         
         
         // Read data and react to changes
@@ -149,8 +152,10 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
                     
                     let annotation = MKPointAnnotation()
                     var coordinates = CLLocationCoordinate2D()
-                    coordinates.latitude = venda.latitude as CLLocationDegrees
-                    coordinates.longitude = venda.longitude as CLLocationDegrees
+                    let lat = Double(venda.latitude)!
+                    let long = Double(venda.longitude)!
+                    coordinates.latitude = lat as CLLocationDegrees
+                    coordinates.longitude = long as CLLocationDegrees
                     annotation.coordinate = coordinates
                     annotation.title = "\(venda.nome) \(venda.data)"
                     //annotation.subtitle = student.mediaURL
