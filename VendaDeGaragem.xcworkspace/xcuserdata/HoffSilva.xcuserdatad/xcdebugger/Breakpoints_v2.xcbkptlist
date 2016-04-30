@@ -19,70 +19,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "VendaDeGaragem/ParseConvenience.swift"
-            timestampString = "483675870.00445"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
-            landmarkName = "gettingVendas(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VendaDeGaragem/ParseConvenience.swift"
-            timestampString = "483675870.00445"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "gettingVendas(_:)"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VendaDeGaragem.ParseConvenience.(gettingVendas ((networkConectionError : Swift.Bool) -&gt; ()) -&gt; ()).(closure #1)"
-                  moduleName = "VendaDeGaragem"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/HoffSilva/Google%20Drive/Udacity/iOS%20Apps/GitHub%20Projects/6-VendaDeGaragem/VendaDeGaragem/ParseConvenience.swift"
-                  timestampString = "483294119.634833"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "31"
-                  endingLineNumber = "31"
-                  offsetFromSymbolStart = "2103">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VendaDeGaragem.ParseConvenience.(gettingVendas ((networkConectionError : Swift.Bool) -&gt; ()) -&gt; ()).(closure #1)"
-                  moduleName = "VendaDeGaragem"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/HoffSilva/Google%20Drive/Udacity/iOS%20Apps/GitHub%20Projects/6-VendaDeGaragem/VendaDeGaragem/ParseConvenience.swift"
-                  timestampString = "483294119.63498"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "31"
-                  endingLineNumber = "31"
-                  offsetFromSymbolStart = "2768">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "VendaDeGaragem/UserViewController.swift"
             timestampString = "483422929.831542"
             startingColumnNumber = "9223372036854775807"
@@ -148,28 +84,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "VendaDeGaragem/ShowSalesViewController.swift"
-            timestampString = "483673928.836397"
+            timestampString = "483725217.595992"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
             landmarkName = "putSalesOnMap()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VendaDeGaragem/ParseConvenience.swift"
-            timestampString = "483675870.00445"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
-            landmarkName = "gettingVendas(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -218,6 +138,38 @@
             startingLineNumber = "27"
             endingLineNumber = "27"
             landmarkName = "viewDidLoad()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "VendaDeGaragem/AddSaleTableViewController.swift"
+            timestampString = "483713846.125076"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "saveSale()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "VendaDeGaragem/ShowSalesViewController.swift"
+            timestampString = "483725272.107452"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
+            landmarkName = "putSalesOnMap()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

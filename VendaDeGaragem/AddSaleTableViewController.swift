@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Firebase
+//import Firebase
 import FBSDKCoreKit
 import FBSDKLoginKit
 import MapKit
@@ -15,11 +15,15 @@ import MapKit
 class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, CLLocationManagerDelegate {
     
     var statusVenda = [String]()
-    var statusSelected = ""
+    var statusSelected = "iniciada"
     var idOfUser = ""
     let locationManager = CLLocationManager()
+    var overlayView = UIView()
+    var activityIndicator = UIActivityIndicatorView()
+    var coordinates = CLLocationCoordinate2D()
+
     
-    let myRootRef = Firebase(url:"https://vendadegaragem.firebaseio.com")
+    //let myRootRef = Firebase(url:"https://vendadegaragem.firebaseio.com")
     let parse = ParseConvenience()
 
     @IBAction func cancelar(sender: AnyObject) {
@@ -37,25 +41,6 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
         super.viewDidLoad()
         
         
-        alert("Sua venda deve ter um nome!", titulo: ":\\")
-        let alertController = UIAlertController(title: "", message: "", preferredStyle: .Alert)
-        
-//        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
-//            // ...
-//        }
-//        alertController.addAction(cancelAction)
-        
-        let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
-            // ...
-        }
-        alertController.addAction(OKAction)
-        
-        self.self.presentViewController(alertController, animated: true) {
-            // ...
-        }
-        
-        
-        
         
         statusVenda = ["Iniciada", "Prevista", "Encerrada"]
         self.locationManager.delegate = self
@@ -64,10 +49,15 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
         self.locationManager.startUpdatingLocation()
         
         switch CLLocationManager.authorizationStatus() {
-        case .AuthorizedAlways: break
+        case .AuthorizedAlways:
+            coordinates = getCoordinates()
         // ...
         case .NotDetermined:
             locationManager.requestAlwaysAuthorization()
+            
+                 self.coordinates = self.getCoordinates()
+            
+           
         case .AuthorizedWhenInUse, .Restricted, .Denied:
             let alertController = UIAlertController(
                 title: "Background Location Access Disabled",
@@ -92,38 +82,29 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
         getFacebookId()
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    
+    @IBAction func publicarVenda(sender: AnyObject) {
+       
+        validateFields()
         
     }
     
-    @IBAction func publicarVenda(sender: AnyObject) {
-        validateFields()
-        let data : String = "\(datePickerData.date)"
-        print(data)
+    func saveSale() {
+    
+        print(formataData(datePickerData), String(coordinates.latitude), String(coordinates.longitude),  getCard(),  formataHora(datePickerHoraInicio),  formataHora(datePickerHoraTermino), textFieldNome.text!,  statusSelected ,  idOfUser)
         
-        alert("", titulo: "")
-        parse.saveVenda(data, latitude: "\(getCoordinates().latitude)", longitude: "\(getCoordinates().longitude)", forma_pagamento: "\(getCard())", hora_inicio: "\(datePickerHoraInicio.date)", hora_termino: "\(datePickerHoraTermino.date)", nome: textFieldNome.text!, status: statusSelected, id: "\(idOfUser)")
+        parse.saveVenda(formataData(datePickerData), latitude: String(coordinates.latitude), longitude: String(coordinates.longitude), forma_pagamento: getCard(), hora_inicio: formataHora(datePickerHoraInicio), hora_termino: formataHora(datePickerHoraTermino), nome: textFieldNome.text!, status: statusSelected , id: idOfUser)
         
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func manageVenda(data : UIDatePicker, latitude: String, longitude: String, forma_pagamento : String, hora_inicio: UIDatePicker, hora_termino: UIDatePicker, nome: String, status: String, id: String) -> Vendas {
-        var venda: Vendas!
-        
+    
+    
+    func formataData(data: UIDatePicker) -> String{
         var dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "dd-MM-yyyy"
+        dateFormatter.dateFormat = "dd/MM/yyyy"
         var strDate = dateFormatter.stringFromDate(data.date)
-        
-        venda.data = strDate
-        venda.latitude = latitude
-        venda.longitude = longitude
-        venda.forma_pagamento = forma_pagamento
-        venda.hora_inicio = formataHora(hora_inicio)
-        venda.hora_termino = formataHora(hora_termino)
-        venda.nome = nome
-        venda.id = id
-
-        return venda
+        return strDate
     }
     
     func formataHora(hora: UIDatePicker) -> String {
@@ -134,46 +115,58 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
     }
     
     
+    
     func validateFields() {
         
+        var today = NSDate()
+        print(today)
+        
         if textFieldNome.text == "" {
-            alert("Sua venda deve ter um nome!", titulo: ":\\")
-            let alertController = UIAlertController(title: "", message: "", preferredStyle: .Alert)
+            let border = CALayer()
+            let width = CGFloat(2.0)
+            border.borderColor = UIColor.redColor().CGColor
+            border.frame = CGRect(x: 0, y: textFieldNome.frame.size.height - width, width:  textFieldNome.frame.size.width, height: textFieldNome.frame.size.height)
+            border.borderWidth = width
+            textFieldNome.layer.addSublayer(border)
+            textFieldNome.layer.masksToBounds = true
+            textFieldNome.becomeFirstResponder()
+            return
+        }else if datePickerHoraInicio.date.compare(datePickerHoraTermino.date) == NSComparisonResult.OrderedDescending || formataHora(datePickerHoraTermino) == formataHora(datePickerHoraInicio){
+            let border = CALayer()
+            let width = CGFloat(2.0)
+            border.borderColor = UIColor.redColor().CGColor
+            border.frame = CGRect(x: 0, y: datePickerHoraInicio.frame.size.height - width, width:  datePickerHoraInicio.frame.size.width, height: datePickerHoraInicio.frame.size.height)
+            border.borderWidth = width
+            datePickerHoraInicio.layer.addSublayer(border)
+            datePickerHoraInicio.layer.masksToBounds = true
             
-            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
-                // ...
-            }
-            alertController.addAction(cancelAction)
-            
-            let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
-                // ...
-            }
-            alertController.addAction(OKAction)
-            
-           self.self.presentViewController(alertController, animated: true) {
-                // ...
-            }
+            border.frame = CGRect(x: 0, y: datePickerHoraTermino.frame.size.height - width, width:  datePickerHoraTermino.frame.size.width, height: datePickerHoraTermino.frame.size.height)
+            border.borderWidth = width
+            datePickerHoraTermino.layer.addSublayer(border)
+            datePickerHoraTermino.layer.masksToBounds = true
+            datePickerHoraTermino.becomeFirstResponder()
+            return
+        }else if today.compare(datePickerData.date) == NSComparisonResult.OrderedDescending{
+            let border = CALayer()
+            let width = CGFloat(2.0)
+            border.borderColor = UIColor.redColor().CGColor
+            border.frame = CGRect(x: 0, y: datePickerData.frame.size.height - width, width:  datePickerData.frame.size.width, height: datePickerData.frame.size.height)
+            border.borderWidth = width
+            datePickerData.layer.addSublayer(border)
+            datePickerData.layer.masksToBounds = true
+            datePickerData.becomeFirstResponder()
+            return
 
         }
+        else{
+            saveSale()
+            
+        }
+        
+        
     }
     
-    func alert(msg: String, titulo: String) {
-        let alertController = UIAlertController(title: titulo, message: msg, preferredStyle: .Alert)
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
-            // ...
-        }
-        alertController.addAction(cancelAction)
-        
-        let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
-            // ...
-        }
-        alertController.addAction(OKAction)
-        
-        self.self.presentViewController(alertController, animated: true) {
-            // ...
-        }
-    }
+    
     
     func getCard() -> String {
         if aceitaCartao.on{

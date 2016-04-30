@@ -32,7 +32,8 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
         
         
-        
+       
+        print(VendasSingleton.arrayDeVendas)
         
      
        

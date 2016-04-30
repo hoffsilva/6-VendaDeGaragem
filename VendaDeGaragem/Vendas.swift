@@ -7,32 +7,59 @@
 //
 
 import UIKit
+import CoreData
 
-class Vendas: NSObject {
+class Vendas: NSManagedObject {
     
-    var data : String!
-    var latitude: String!
-    var longitude: String!
-    var forma_pagamento : String!
-    var hora_inicio : String!
-    var hora_termino : String!
-    var nome : String!
-    var status : String!
-    var id : String!
+    struct Keys {
+        static let data = "data"
+        static let latitude = "latitude"
+        static let longitude = "longitude"
+        static let forma_pagamento = "forma_pagamento"
+        static let hora_inicio = "hora_inicio"
+        static let hora_termino = "hora_termino"
+        static let nome = "nome"
+        static let status = "status"
+        static let id_facebook = "id_facebook"
+        static let id_azure = "id_azure"
+    }
+    
+    @NSManaged var data : String!
+    @NSManaged var latitude: String!
+    @NSManaged var longitude: String!
+    @NSManaged var forma_pagamento : String!
+    @NSManaged var hora_inicio : String!
+    @NSManaged var hora_termino : String!
+    @NSManaged var nome : String!
+    @NSManaged var status : String!
+    @NSManaged var id_facebook : String!
+    @NSManaged var id_azure : String!
+    
+    
     
     var arrayDeVendas = [Vendas]()
     
-    init(data : String, latitude: String, longitude: String, forma_pagamento : String, hora_inicio: String, hora_termino: String, nome: String, status: String, id: String) {
+    override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertIntoManagedObjectContext: context)
+    }
+    
+    init(dictionary: [String : AnyObject], context: NSManagedObjectContext) {
         
-        self.data = data
-        self.latitude = latitude
-        self.longitude = longitude
-        self.forma_pagamento = forma_pagamento
-        self.hora_inicio = hora_inicio
-        self.hora_termino = hora_termino
-        self.nome = nome
-        self.status = status
-        self.id = id
+        let entity =  NSEntityDescription.entityForName("Venda", inManagedObjectContext: context)!
+        
+        super.init(entity: entity,insertIntoManagedObjectContext: context)
+        
+        data = dictionary[Keys.data] as? String
+        latitude = dictionary[Keys.latitude] as? String
+        longitude = dictionary[Keys.longitude] as? String
+        forma_pagamento = dictionary[Keys.forma_pagamento] as? String
+        hora_inicio = dictionary[Keys.hora_inicio] as? String
+        hora_termino = dictionary[Keys.hora_termino] as? String
+        nome = dictionary[Keys.nome] as? String
+        status = dictionary[Keys.status] as? String
+        id_facebook = dictionary[Keys.id_facebook] as? String
+        id_azure = dictionary[Keys.id_azure] as? String
+       
     }
 
 }

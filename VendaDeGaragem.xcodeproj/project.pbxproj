@@ -10,6 +10,9 @@
 		0B0FE4B01CCA8FDC00D327ED /* ParseConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0FE4AF1CCA8FDC00D327ED /* ParseConvenience.swift */; };
 		0B0FE4B61CCA942000D327ED /* Vendas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0FE4B51CCA942000D327ED /* Vendas.swift */; };
 		0B58BF851CD427160072E24F /* WindowsAzureMobileServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B58BF841CD427160072E24F /* WindowsAzureMobileServices.framework */; };
+		0B58BF8A1CD520970072E24F /* CoreDataStackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B58BF891CD520970072E24F /* CoreDataStackManager.swift */; };
+		0B58BF8D1CD521330072E24F /* VendaDeGaragem_Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0B58BF8B1CD521330072E24F /* VendaDeGaragem_Model.xcdatamodeld */; };
+		0B58BF8F1CD5225C0072E24F /* VendaPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B58BF8E1CD5225C0072E24F /* VendaPersistence.swift */; };
 		0B898EC31CD17FC100359F3B /* VendaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B898EC21CD17FC100359F3B /* VendaTableViewCell.swift */; };
 		0B898EC51CD193C400359F3B /* VendasSingletonOfUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B898EC41CD193C400359F3B /* VendasSingletonOfUser.swift */; };
 		0B898EC71CD29FD800359F3B /* DetalhVendaTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B898EC61CD29FD800359F3B /* DetalhVendaTableViewController.swift */; };
@@ -32,6 +35,9 @@
 		0B0FE4B51CCA942000D327ED /* Vendas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vendas.swift; sourceTree = "<group>"; };
 		0B58BF841CD427160072E24F /* WindowsAzureMobileServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WindowsAzureMobileServices.framework; path = Diversos/WindowsAzureMobileServices.framework; sourceTree = "<group>"; };
 		0B58BF861CD4273D0072E24F /* VendaDeGaragem-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VendaDeGaragem-Bridging-Header.h"; sourceTree = "<group>"; };
+		0B58BF891CD520970072E24F /* CoreDataStackManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStackManager.swift; sourceTree = "<group>"; };
+		0B58BF8C1CD521330072E24F /* VendaDeGaragem_Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VendaDeGaragem_Model.xcdatamodel; sourceTree = "<group>"; };
+		0B58BF8E1CD5225C0072E24F /* VendaPersistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VendaPersistence.swift; sourceTree = "<group>"; };
 		0B898EC21CD17FC100359F3B /* VendaTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VendaTableViewCell.swift; sourceTree = "<group>"; };
 		0B898EC41CD193C400359F3B /* VendasSingletonOfUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VendasSingletonOfUser.swift; sourceTree = "<group>"; };
 		0B898EC61CD29FD800359F3B /* DetalhVendaTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetalhVendaTableViewController.swift; sourceTree = "<group>"; };
@@ -90,6 +96,7 @@
 		0BEDDEC01CB59DE000F04FE9 /* VendaDeGaragem */ = {
 			isa = PBXGroup;
 			children = (
+				0B58BF891CD520970072E24F /* CoreDataStackManager.swift */,
 				0BEDDEC11CB59DE000F04FE9 /* AppDelegate.swift */,
 				0BEDDEC31CB59DE000F04FE9 /* ShowSalesViewController.swift */,
 				0BEDDEC51CB59DE000F04FE9 /* Main.storyboard */,
@@ -105,6 +112,8 @@
 				0B898EC41CD193C400359F3B /* VendasSingletonOfUser.swift */,
 				0B898EC61CD29FD800359F3B /* DetalhVendaTableViewController.swift */,
 				0B58BF861CD4273D0072E24F /* VendaDeGaragem-Bridging-Header.h */,
+				0B58BF8B1CD521330072E24F /* VendaDeGaragem_Model.xcdatamodeld */,
+				0B58BF8E1CD5225C0072E24F /* VendaPersistence.swift */,
 			);
 			path = VendaDeGaragem;
 			sourceTree = "<group>";
@@ -255,11 +264,14 @@
 			files = (
 				0BCBE7F31CCBB43B00A918D8 /* UserTableViewController.swift in Sources */,
 				0B898EC31CD17FC100359F3B /* VendaTableViewCell.swift in Sources */,
+				0B58BF8A1CD520970072E24F /* CoreDataStackManager.swift in Sources */,
 				0BEDDEC41CB59DE000F04FE9 /* ShowSalesViewController.swift in Sources */,
+				0B58BF8D1CD521330072E24F /* VendaDeGaragem_Model.xcdatamodeld in Sources */,
 				0BCBE7F91CD01A3E00A918D8 /* AddSaleTableViewController.swift in Sources */,
 				0B0FE4B01CCA8FDC00D327ED /* ParseConvenience.swift in Sources */,
 				0BCBE7F51CCE583100A918D8 /* VendasSingleton.swift in Sources */,
 				0B898EC71CD29FD800359F3B /* DetalhVendaTableViewController.swift in Sources */,
+				0B58BF8F1CD5225C0072E24F /* VendaPersistence.swift in Sources */,
 				0B0FE4B61CCA942000D327ED /* Vendas.swift in Sources */,
 				0BEDDEC21CB59DE000F04FE9 /* AppDelegate.swift in Sources */,
 				0B898EC51CD193C400359F3B /* VendasSingletonOfUser.swift in Sources */,
@@ -440,6 +452,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		0B58BF8B1CD521330072E24F /* VendaDeGaragem_Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				0B58BF8C1CD521330072E24F /* VendaDeGaragem_Model.xcdatamodel */,
+			);
+			currentVersion = 0B58BF8C1CD521330072E24F /* VendaDeGaragem_Model.xcdatamodel */;
+			path = VendaDeGaragem_Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 0BEDDEB61CB59DDF00F04FE9 /* Project object */;
 }

@@ -13,6 +13,8 @@ import FBSDKCoreKit
 class UserTableViewController: UITableViewController {
 
     var idOfFacebook = String()
+    var vendaPersistence = VendaPersistence()
+    var vendasOfUser = [Vendas]
     
    @IBOutlet weak var navItem: UINavigationItem!
     let buttonFacebook = UIButton()
@@ -89,14 +91,16 @@ class UserTableViewController: UITableViewController {
     }
     
     func vendasOfUser(id: String){
+        vendaPersistence.buscarVendasDeUsuarios(idOfFacebook)
+        
         VendasSingletonOfUser.arrayDeVendasDoUsuario.removeAll()
         for venda in VendasSingleton.arrayDeVendas {
             var idOfVenda = ""
-            idOfVenda = "\(venda.id)"
+            idOfVenda = "\(venda.id_facebook)"
             if idOfVenda == id{
                 print("deu certo!!")
                 
-                VendasSingletonOfUser.arrayDeVendasDoUsuario.append(Vendas(data: venda.data, latitude: venda.latitude, longitude: venda.longitude, forma_pagamento: venda.forma_pagamento, hora_inicio: venda.hora_inicio, hora_termino: venda.hora_termino, nome: venda.nome, status: venda.status, id: venda.id))
+                //VendasSingletonOfUser.arrayDeVendasDoUsuario.append(Vendas(data: venda.data, latitude: venda.latitude, longitude: venda.longitude, forma_pagamento: venda.forma_pagamento, hora_inicio: venda.hora_inicio, hora_termino: venda.hora_termino, nome: venda.nome, status: venda.status, id: venda.id))
             }
         }
         
@@ -143,8 +147,9 @@ class UserTableViewController: UITableViewController {
                             print("result \(result)")
                             if let idFacebook = result["id"]{
                                 print(idFacebook)
-                                var teste = "\(idFacebook!)"
-                                self.vendasOfUser(teste)
+                                self.vendasOfUser = self.vendaPersistence.buscarVendasDeUsuarios("\(idFacebook!)")
+                                //var teste = "\(idFacebook!)"
+                                //self.vendasOfUser(teste)
                             }
                         }
                         else
