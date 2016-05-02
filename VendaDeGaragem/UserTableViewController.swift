@@ -20,7 +20,7 @@ class UserTableViewController: UITableViewController {
     let buttonFacebook = UIButton()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        reloadTableView()
         
     }
     
@@ -33,7 +33,10 @@ class UserTableViewController: UITableViewController {
 
     override func viewWillAppear(animated: Bool) {
        verifyIfUserIslogged()
-        reloadTableView()
+        dispatch_async(dispatch_get_main_queue()) { 
+            self.reloadTableView()
+        }
+        
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {

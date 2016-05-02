@@ -50,7 +50,7 @@ class ParseConvenience: NSObject {
     
     func atualizarVenda(data : String, latitude: String, longitude: String, forma_pagamento : String, hora_inicio: String, hora_termino: String, nome: String, status: String, id_facebook: String, id_azure: String) {
         let table = client.tableWithName("Venda")
-        var itemToUpdate:NSDictionary = ["data":data,
+        var oldItem:NSDictionary = ["data":data,
                                          "forma_pagamento": forma_pagamento,
                                          "hora_inicio": hora_inicio,
                                          "hora_termino": hora_termino,
@@ -59,14 +59,34 @@ class ParseConvenience: NSObject {
                                          "longitude": longitude,
                                          "nome": nome,
                                          "status": status]
-        table.update(itemToUpdate as! [NSObject : AnyObject], parameters: ["id" : id_azure]) { (request, error) in
+        
+        var newItem = oldItem.mutableCopy() as! NSDictionary; // oldItem is NSDictionary
+        newItem.setValue(id_azure, forKey: "id")
+        newItem.setValue(data, forKey: "data")
+        newItem.setValue(forma_pagamento, forKey: "forma_pagamento")
+        newItem.setValue(hora_inicio, forKey: "hora_inicio")
+        newItem.setValue(hora_termino, forKey: "hora_termino")
+        newItem.setValue(id_facebook, forKey: "id_facebook")
+        newItem.setValue(latitude, forKey: "latitude")
+        newItem.setValue(longitude, forKey: "longitude")
+        newItem.setValue(nome, forKey: "nome")
+        newItem.setValue(status, forKey: "status")
+        
+        table.update(newItem as [NSObject : AnyObject]) { (result, error) in
             if (error != nil){
                 print("error: \(error)")
-            }
-            else{
+            }else{
                 print("Success!")
             }
         }
+//        table.update(itemToUpdate as! [NSObject : AnyObject], parameters: ["id" : id_azure]) { (request, error) in
+//            if (error != nil){
+//                print("error: \(error)")
+//            }
+//            else{
+//                print("Success!")
+//            }
+//        }
     }
     
     func gettingVendas(onCompletion: (networkConectionError : Bool) ->()){

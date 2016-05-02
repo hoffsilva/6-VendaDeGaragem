@@ -121,13 +121,11 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
     }
     
     func putSalesOnMap() {
-       // getVendas()
         parseConvenience.gettingVendas({ (networkConectionError) in
             if networkConectionError == true{
                 let alert = UIAlertController(title: ":(", message: "Internet conection was lost or server is offline!", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
-                //self.overlayView.removeFromSuperview()
                 return
                 
             }else{
@@ -136,8 +134,6 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
                 self.getVendas()
                 print(self.vendas)
                 for venda in self.vendas {
-                    // print("\(student.firstName) \(student.mapString)")
-                    
                     let annotation = MKPointAnnotation()
                     var coordinates = CLLocationCoordinate2D()
                     let lat = Double(venda.latitude)!
@@ -147,20 +143,10 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
                     annotation.coordinate = coordinates
                     annotation.title = "\(venda.nome!) \(venda.data!)"
                     annotation.subtitle = "\(venda.status)"
-                    
-                    
-                    
-                    
-                    //annotation.subtitle = student.mediaURL
-                    // Finally we place the annotation in an array of annotations.
                     self.annotations.append(annotation)
 
                 }
                 self.mapView.addAnnotations(self.annotations)
-                //self.mapa.setCenterCoordinate(self.mapa.region.center, animated: true)
-                //self.overlayView.removeFromSuperview()
-            
-                
             }
             
            
@@ -194,9 +180,9 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
         btn_photoAlbum.addTarget(self, action: "detalharVenda", forControlEvents: .TouchUpInside)
         
         pinView!.canShowCallout = true
-        if annotation.title! == "Iniciada" {
+        if annotation.title! == "Confirmada" {
             pinView!.image = UIImage(named:"facebookOnline")!
-        }else if annotation.title! == "Iniciada"{
+        }else if annotation.title! == "Prevista"{
             pinView!.image = UIImage(named:"detail")!
         }else{
             pinView!.image = UIImage(named:"facebookOffline")!
@@ -209,14 +195,7 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        if segue.identifier == "detalharVenda"{
-//            
-//            let detalharVenda: DetalhVendaTableViewController = segue.destinationViewController as! DetalhVendaTableViewController
-//            
-//            detalharVenda.venda = vendaTemp[0]
-//        }
         let nav  = segue.destinationViewController as! UINavigationController
-        //let detalharVenda: DetalhVendaTableViewController = segue.destinationViewController as! DetalhVendaTableViewController
         let detalharVenda = nav.topViewController as! DetalhVendaTableViewController
         detalharVenda.venda = vendaTemp[0]
     }

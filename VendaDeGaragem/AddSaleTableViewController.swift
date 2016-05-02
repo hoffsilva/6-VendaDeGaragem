@@ -15,7 +15,7 @@ import MapKit
 class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, CLLocationManagerDelegate {
     
     var statusVenda = [String]()
-    var statusSelected = "iniciada"
+    var statusSelected = "Conformada"
     var idOfUser = ""
     let locationManager = CLLocationManager()
     
@@ -48,41 +48,12 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
             textFieldNome.text = venda.nome!
         }
         
-        statusVenda = ["Iniciada", "Prevista", "Encerrada"]
+        statusVenda = ["Confirmada", "Prevista", "Encerrada"]
         self.locationManager.delegate = self
         
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestAlwaysAuthorization()
         self.locationManager.startUpdatingLocation()
-        
-//        switch CLLocationManager.authorizationStatus() {
-//        case .AuthorizedAlways:
-//            coordinates = getCoordinates()
-//        // ...
-//        case .NotDetermined:
-//            locationManager.requestAlwaysAuthorization()
-//            
-//                 self.coordinates = self.getCoordinates()
-//            
-//           
-//        case .AuthorizedWhenInUse, .Restricted, .Denied:
-//            let alertController = UIAlertController(
-//                title: "Background Location Access Disabled",
-//                message: "In order to be notified about adorable kittens near you, please open this app's settings and set location access to 'Always'.",
-//                preferredStyle: .Alert)
-//            
-//            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-//            alertController.addAction(cancelAction)
-//            
-//            let openAction = UIAlertAction(title: "Open Settings", style: .Default) { (action) in
-//                if let url = NSURL(string:UIApplicationOpenSettingsURLString) {
-//                    UIApplication.sharedApplication().openURL(url)
-//                }
-//            }
-//            alertController.addAction(openAction)
-//            
-//            self.presentViewController(alertController, animated: true, completion: nil)
-//        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -143,6 +114,23 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
     
     func updateSale() {
         parse.atualizarVenda(formataData(datePickerData), latitude: String(coordinates.latitude), longitude: String(coordinates.longitude), forma_pagamento: getCard(), hora_inicio: formataHora(datePickerHoraInicio), hora_termino: formataHora(datePickerHoraTermino), nome: textFieldNome.text!, status: statusSelected, id_facebook: idOfUser, id_azure: venda.id_azure)
+       
+        let objectVenda = vendaPersistence.vendaPorIdAzure(venda.id_azure)
+        objectVenda[0].data = formataData(datePickerData)
+        objectVenda[0].latitude = String(coordinates.latitude)
+        objectVenda[0].longitude = String(coordinates.longitude)
+        objectVenda[0].forma_pagamento = formataHora(datePickerHoraInicio)
+        objectVenda[0].hora_inicio = formataHora(datePickerHoraTermino)
+        objectVenda[0].hora_termino = formataHora(datePickerHoraInicio)
+        objectVenda[0].nome = textFieldNome.text!
+        objectVenda[0].status = statusSelected
+        objectVenda[0].id_facebook = idOfUser
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+        
+        parse.getVendas { (networkConectionError) in
+            print("ok")
+        }
         
     }
     
