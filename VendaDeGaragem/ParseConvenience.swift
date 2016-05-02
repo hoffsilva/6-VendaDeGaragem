@@ -43,8 +43,6 @@ class ParseConvenience: NSObject {
             }
         )
         
-        
-        //client.syncTableWithName("Venda")
     }
     
     
@@ -79,20 +77,10 @@ class ParseConvenience: NSObject {
                 print("Success!")
             }
         }
-//        table.update(itemToUpdate as! [NSObject : AnyObject], parameters: ["id" : id_azure]) { (request, error) in
-//            if (error != nil){
-//                print("error: \(error)")
-//            }
-//            else{
-//                print("Success!")
-//            }
-//        }
+
     }
     
     func gettingVendas(onCompletion: (networkConectionError : Bool) ->()){
-       // curl "https://vendadegaragem.firebaseio.com/users.json"
-        //let request = NSMutableURLRequest(URL: NSURL(string: String(client.applicationURL))!)
-        //let session = NSURLSession.sharedSession()
         let table = client.tableWithName("Venda")
         
         table.readWithCompletion { (result, error) in

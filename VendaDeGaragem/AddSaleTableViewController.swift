@@ -44,6 +44,7 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard)))
         if verifyIfIsUpdate(){
             textFieldNome.text = venda.nome!
         }
@@ -99,6 +100,10 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
         }else{
             return false
         }
+    }
+    
+    func dismissKeyboard() {
+        self.view.endEditing(true)
     }
     
     func saveSale() {
@@ -243,10 +248,6 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
         // Dispose of any resources that can be recreated.
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
 
     // MARK: - Table view data source
 
