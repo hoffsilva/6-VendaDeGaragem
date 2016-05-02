@@ -10,7 +10,7 @@ If the user is logged, he will can edit, add and delete one or many sales.
 
 How to use app:
 
-![alt tag](https://www.dropbox.com/s/t7jdbr2qlj44dky/vendaDeGaragem.gif?dl=0)
+![alt tag](https://www.dropbox.com/s/t7jdbr2qlj44dky/vendaDeGaragem.gif)
 
 
 
