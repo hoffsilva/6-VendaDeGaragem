@@ -55,38 +55,64 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
         self.locationManager.requestAlwaysAuthorization()
         self.locationManager.startUpdatingLocation()
         
-        switch CLLocationManager.authorizationStatus() {
-        case .AuthorizedAlways:
-            coordinates = getCoordinates()
-        // ...
-        case .NotDetermined:
-            locationManager.requestAlwaysAuthorization()
-            
-                 self.coordinates = self.getCoordinates()
-            
-           
-        case .AuthorizedWhenInUse, .Restricted, .Denied:
-            let alertController = UIAlertController(
-                title: "Background Location Access Disabled",
-                message: "In order to be notified about adorable kittens near you, please open this app's settings and set location access to 'Always'.",
-                preferredStyle: .Alert)
-            
-            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-            alertController.addAction(cancelAction)
-            
-            let openAction = UIAlertAction(title: "Open Settings", style: .Default) { (action) in
-                if let url = NSURL(string:UIApplicationOpenSettingsURLString) {
-                    UIApplication.sharedApplication().openURL(url)
-                }
-            }
-            alertController.addAction(openAction)
-            
-            self.presentViewController(alertController, animated: true, completion: nil)
-        }
+//        switch CLLocationManager.authorizationStatus() {
+//        case .AuthorizedAlways:
+//            coordinates = getCoordinates()
+//        // ...
+//        case .NotDetermined:
+//            locationManager.requestAlwaysAuthorization()
+//            
+//                 self.coordinates = self.getCoordinates()
+//            
+//           
+//        case .AuthorizedWhenInUse, .Restricted, .Denied:
+//            let alertController = UIAlertController(
+//                title: "Background Location Access Disabled",
+//                message: "In order to be notified about adorable kittens near you, please open this app's settings and set location access to 'Always'.",
+//                preferredStyle: .Alert)
+//            
+//            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+//            alertController.addAction(cancelAction)
+//            
+//            let openAction = UIAlertAction(title: "Open Settings", style: .Default) { (action) in
+//                if let url = NSURL(string:UIApplicationOpenSettingsURLString) {
+//                    UIApplication.sharedApplication().openURL(url)
+//                }
+//            }
+//            alertController.addAction(openAction)
+//            
+//            self.presentViewController(alertController, animated: true, completion: nil)
+//        }
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewWillAppear(animated: Bool) {
         getFacebookId()
+        locationManagers(locationManager, didChangeAuthorizationStatus: .AuthorizedAlways)
+    }
+    
+    func locationManagers(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        switch status {
+        case .NotDetermined:
+            // If status has not yet been determied, ask for authorization
+            manager.requestWhenInUseAuthorization()
+            break
+        case .AuthorizedWhenInUse:
+            // If authorized when in use
+            manager.startUpdatingLocation()
+            break
+        case .AuthorizedAlways:
+            // If always authorized
+            manager.startUpdatingLocation()
+            break
+        case .Restricted:
+            // If restricted by e.g. parental controls. User can't enable Location Services
+            break
+        case .Denied:
+            // If user denied your app access to Location Services, but can grant access from Settings.app
+            break
+        default:
+            break
+        }
     }
     
     
