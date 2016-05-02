@@ -45,6 +45,17 @@ class ParseConvenience: NSObject {
         
     }
     
+    func deletarVenda(id_azure: String) {
+        let table = client.tableWithName("Venda")
+        table.deleteWithId(id_azure) { (result, error) in
+            if (error != nil){
+                print("error: \(error)")
+            }
+            else{
+                print("Success!")
+            }
+        }
+    }
     
     func atualizarVenda(data : String, latitude: String, longitude: String, forma_pagamento : String, hora_inicio: String, hora_termino: String, nome: String, status: String, id_facebook: String, id_azure: String) {
         let table = client.tableWithName("Venda")

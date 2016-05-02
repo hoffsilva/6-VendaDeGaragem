@@ -15,6 +15,7 @@ class UserTableViewController: UITableViewController {
     var idOfFacebook = String()
     var vendaPersistence = VendaPersistence()
     var vendasOfUser = [Vendas]()
+    var parse = ParseConvenience()
     
    @IBOutlet weak var navItem: UINavigationItem!
     let buttonFacebook = UIButton()
@@ -116,6 +117,20 @@ class UserTableViewController: UITableViewController {
             print("Detalhou!")
         }
     }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        parse.deletarVenda(vendasOfUser[indexPath.row].id_azure)
+        
+        CoreDataStackManager.sharedInstance().managedObjectContext.deleteObject(self.vendasOfUser[indexPath.row])
+        
+        vendasOfUser.removeAtIndex(indexPath.row)
+        
+        tableView.reloadData()
+        
+    }
+    
+   
     
     func loginButtonClicked() {
        
