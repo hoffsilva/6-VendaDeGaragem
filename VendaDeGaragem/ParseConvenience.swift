@@ -62,12 +62,12 @@ class ParseConvenience: NSObject {
             }else if let itens = result.items{
                 if itens.count > 0{
                     print(itens)
-                    VendasSingleton.arrayDeVendas.removeAll()
                     self.vendaPersistence.clearData()
                     for venda in itens{
                         self.vendaPersistence.saveVenda(venda["data"] as! String, latitude: venda["latitude"] as! String, longitude: venda["longitude"] as! String, forma_pagamento: venda["forma_pagamento"] as! String, hora_inicio: venda["hora_inicio"] as! String, hora_termino: venda["hora_termino"] as! String, nome: venda["nome"] as! String, status: venda["status"] as! String, id_facebook: venda["id_facebook"] as! String, id_azure: venda["id"] as! String)
                    // print(VendasSingleton.arrayDeVendas)
                     }
+                    CoreDataStackManager.sharedInstance().saveContext()
                 }
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     onCompletion(networkConectionError: false)

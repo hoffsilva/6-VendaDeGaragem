@@ -21,6 +21,9 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
     var overlayView = UIView()
     var activityIndicator = UIActivityIndicatorView()
     var coordinates = CLLocationCoordinate2D()
+    var vendaPersistence = VendaPersistence()
+    var venda : Vendas!
+    
 
     
     //let myRootRef = Firebase(url:"https://vendadegaragem.firebaseio.com")
@@ -40,7 +43,9 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        if verifyIfIsUpdate(){
+            textFieldNome.text = venda.nome!
+        }
         
         statusVenda = ["Iniciada", "Prevista", "Encerrada"]
         self.locationManager.delegate = self
@@ -89,15 +94,28 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
         
     }
     
+    func verifyIfIsUpdate() -> Bool {
+        if venda != nil{
+            return true
+        }else{
+            return false
+        }
+    }
+    
     func saveSale() {
     
         print(formataData(datePickerData), String(coordinates.latitude), String(coordinates.longitude),  getCard(),  formataHora(datePickerHoraInicio),  formataHora(datePickerHoraTermino), textFieldNome.text!,  statusSelected ,  idOfUser)
         
         parse.saveVenda(formataData(datePickerData), latitude: String(coordinates.latitude), longitude: String(coordinates.longitude), forma_pagamento: getCard(), hora_inicio: formataHora(datePickerHoraInicio), hora_termino: formataHora(datePickerHoraTermino), nome: textFieldNome.text!, status: statusSelected , id: idOfUser)
         
+        vendaPersistence.saveVenda(formataData(datePickerData), latitude: String(coordinates.latitude), longitude: String(coordinates.longitude), forma_pagamento: getCard(), hora_inicio: formataHora(datePickerHoraInicio), hora_termino: formataHora(datePickerHoraTermino), nome: textFieldNome.text!, status: statusSelected, id_facebook: idOfUser, id_azure: "")
+        
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    func updateSale() {
+        
+    }
     
     
     func formataData(data: UIDatePicker) -> String{

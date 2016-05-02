@@ -9,10 +9,15 @@
 import UIKit
 import MapKit
 
+import FBSDKLoginKit
+import FBSDKCoreKit
+
 class DetalhVendaTableViewController: UITableViewController, MKMapViewDelegate {
 
     var venda : Vendas!
     
+    
+    @IBOutlet weak var navBar: UINavigationItem!
     @IBOutlet weak var mapViewLocalDaVenda: MKMapView!
     @IBOutlet weak var labelNomeDaVenda: UILabel!
     @IBOutlet weak var labelDataDaVenda: UILabel!
@@ -21,8 +26,13 @@ class DetalhVendaTableViewController: UITableViewController, MKMapViewDelegate {
     @IBOutlet weak var labelCartao: UILabel!
     @IBOutlet weak var labelStatus: UILabel!
     
+    @IBOutlet weak var editarButton: UIBarButtonItem!
+    @IBOutlet weak var navItem: UINavigationItem!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.title = "sdada"
+        //asasa.title = "\(venda.nome!)"
         
         addPinOnMap()
         vendaAceitaCartao()
@@ -43,6 +53,10 @@ class DetalhVendaTableViewController: UITableViewController, MKMapViewDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        verifyIfUserIslogged()
     }
 
     // MARK: - Table view data source
@@ -115,7 +129,58 @@ class DetalhVendaTableViewController: UITableViewController, MKMapViewDelegate {
             labelStatus.text = "Marque no seu calendário! Essa venda está prevista."
         }
     }
+    
+    func verifyIfUserIslogged(){
+        if(FBSDKAccessToken.currentAccessToken() == nil)
+        {
+            editButton(false)
+            print("not logged in")
+            
+        }
+        else{
+            print("logged in already")
+            let req = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"id"], HTTPMethod: "GET")
+            req.startWithCompletionHandler({ (connection, result, error : NSError!) -> Void in
+                if(error == nil)
+                {
+                    print("result \(result)")
+//                    if let idFacebook = result["id"]{
+//                        print(idFacebook)
+//                        var teste = "\(idFacebook!)"
+//                        self.vendasOfUser(teste)
+//                    }
+                }
+                else
+                {
+                    print("error \(error)")
+                }
+            })
+            
+            editButton(true)
+        }
+        
+    }
+    
+    
+    func editButton(active: Bool) {
+        if active {
+            editarButton.enabled = true
+        }else{
+            editarButton.enabled = false
+        }
+    }
 
+    @IBAction func editarButtonAction(sender: AnyObject) {
+        performSegueWithIdentifier("editarVenda", sender: view)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "editarVenda"{
+            let editarVenda : AddSaleTableViewController = segue.destinationViewController as! AddSaleTableViewController
+            editarVenda.venda = venda
+            print("Detalhou!")
+        }
+    }
     /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)

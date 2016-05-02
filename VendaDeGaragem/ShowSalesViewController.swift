@@ -20,40 +20,20 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
     let buttonFacebook = UIButton()
      // Create a reference to a Firebase location
     
+    var vendas = [Vendas]()
     
+    var vendaPersistence = VendaPersistence()
     var parseConvenience = ParseConvenience()
     var latituteOfLocation = 0.0
     var longitudeOfLocation = 0.0
     
     let dropPin = MKPointAnnotation()
     var annotations = [MKPointAnnotation]()
+    var vendaTemp = [Vendas]()
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
        
-        print(VendasSingleton.arrayDeVendas)
-        
-     
-       
-        
-        
-        // Read data and react to changes
-//        myRootRef.observeEventType(.Value, withBlock: {
-//            snapshot in
-//            print("\(snapshot.key) -> \(snapshot.value)")
-//            print(snapshot)
-//        })
-        
-//        let user1 = ["nome" : "hoff silva"]
-//        
-//        let usersRef = myRootRef.childByAppendingPath("users")
-//        
-//        let users = ["user1": user1]
-//        
-//        usersRef.setValue(users)
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -136,8 +116,12 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
         
     }
 
+    func getVendas(){
+        vendas = vendaPersistence.buscarVendas()
+    }
+    
     func putSalesOnMap() {
-        
+        getVendas()
         parseConvenience.gettingVendas({ (networkConectionError) in
             if networkConectionError == true{
                 let alert = UIAlertController(title: ":(", message: "Internet conection was lost or server is offline!", preferredStyle: UIAlertControllerStyle.Alert)
@@ -147,8 +131,8 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
                 return
                 
             }else{
-                
-                for venda in VendasSingleton.arrayDeVendas {
+                print(self.vendas)
+                for venda in self.vendas {
                     // print("\(student.firstName) \(student.mapString)")
                     
                     let annotation = MKPointAnnotation()
@@ -158,7 +142,12 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
                     coordinates.latitude = lat as CLLocationDegrees
                     coordinates.longitude = long as CLLocationDegrees
                     annotation.coordinate = coordinates
-                    annotation.title = "\(venda.nome) \(venda.data)"
+                    annotation.title = "\(venda.nome!) \(venda.data!)"
+                    annotation.subtitle = "\(venda.status)"
+                    
+                    
+                    
+                    
                     //annotation.subtitle = student.mediaURL
                     // Finally we place the annotation in an array of annotations.
                     self.annotations.append(annotation)
@@ -178,13 +167,60 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
         
             self.mapView.addAnnotations(self.annotations)
             print(self.annotations)
+   
+    }
+    
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         
+        let reuseId = "pin"
         
-
+        var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
         
+        if pinView == nil {
+            pinView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+        }
+        else {
+            pinView!.annotation = annotation
+        }
         
-       
+        let btn_photoAlbum = UIButton(type: UIButtonType.DetailDisclosure) as UIButton
+        let btnImagePhotoAlbum = UIImage(named: "detail")! as UIImage
+        btn_photoAlbum.setImage(btnImagePhotoAlbum, forState: .Normal)
+        btn_photoAlbum.addTarget(self, action: "detalharVenda", forControlEvents: .TouchUpInside)
         
+        pinView!.canShowCallout = true
+        if annotation.title! == "Iniciada" {
+            pinView!.image = UIImage(named:"facebookOnline")!
+        }else if annotation.title! == "Iniciada"{
+            pinView!.image = UIImage(named:"detail")!
+        }else{
+            pinView!.image = UIImage(named:"facebookOffline")!
+        }
+        
+        pinView!.rightCalloutAccessoryView = btn_photoAlbum
+        pinView!.centerOffset = CGPoint(x: -1, y: -12)
+        
+        return pinView
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "detalharVenda"{
+            
+            let detalharVenda: DetalhVendaTableViewController = segue.destinationViewController as! DetalhVendaTableViewController
+            
+            detalharVenda.venda = vendaTemp[0]
+        }
+    }
+    
+    
+    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
+        vendaTemp = vendaPersistence.buscaVendaOfCoodinate((view.annotation?.coordinate)!)
+        print(vendaTemp[0])
+    }
+    
+    
+    func detalharVenda(){
+        self.performSegueWithIdentifier("detalharVenda", sender: self)
     }
 
 }

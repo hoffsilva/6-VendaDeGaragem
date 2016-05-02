@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+@objc(Vendas)
 
 class Vendas: NSManagedObject {
     
@@ -37,7 +38,7 @@ class Vendas: NSManagedObject {
     
     
     
-    var arrayDeVendas = [Vendas]()
+    //var arrayDeVendas = [Vendas]()
     
     override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
         super.init(entity: entity, insertIntoManagedObjectContext: context)
@@ -45,7 +46,7 @@ class Vendas: NSManagedObject {
     
     init(dictionary: [String : AnyObject], context: NSManagedObjectContext) {
         
-        let entity =  NSEntityDescription.entityForName("Venda", inManagedObjectContext: context)!
+        let entity =  NSEntityDescription.entityForName("Vendas", inManagedObjectContext: context)!
         
         super.init(entity: entity,insertIntoManagedObjectContext: context)
         

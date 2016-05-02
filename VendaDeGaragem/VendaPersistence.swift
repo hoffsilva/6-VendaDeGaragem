@@ -20,7 +20,7 @@ class VendaPersistence: NSObject, NSFetchedResultsControllerDelegate {
     
     lazy var fetchedResultsController: NSFetchedResultsController = {
         
-        let fetchRequest = NSFetchRequest(entityName: "Venda")
+        let fetchRequest = NSFetchRequest(entityName: "Vendas")
         
         //fetchRequest.sortDescriptors = [NSSortDescriptor(key: "latitude", ascending: true)]
         
@@ -50,9 +50,9 @@ class VendaPersistence: NSObject, NSFetchedResultsControllerDelegate {
         
     }
     
-    func buscarPins() -> [Vendas]{
+    func buscarVendas() -> [Vendas]{
         
-        let requsicaoDeBusca = NSFetchRequest(entityName: "Venda")
+        let requsicaoDeBusca = NSFetchRequest(entityName: "Vendas")
         
         do{
             let resultados = try sharedContext.executeFetchRequest(requsicaoDeBusca)
@@ -68,7 +68,11 @@ class VendaPersistence: NSObject, NSFetchedResultsControllerDelegate {
     
     func buscarVendasDeUsuarios(id_facebook: String) -> [Vendas]{
         
-        let requsicaoDeBusca = NSFetchRequest(entityName: "Venda")
+        let requsicaoDeBusca = NSFetchRequest(entityName: "Vendas")
+        
+        print(id_facebook)
+        //print(id_facebook)
+        
         
         requsicaoDeBusca.predicate = NSPredicate(format: "id_facebook == %@", id_facebook);
         
@@ -84,8 +88,33 @@ class VendaPersistence: NSObject, NSFetchedResultsControllerDelegate {
         return []
     }
     
+        
+    func buscaVendaOfCoodinate(coord: CLLocationCoordinate2D) -> [Vendas] {
+        
+        var lat : NSNumber!
+        lat = coord.latitude
+        
+        var longi : NSNumber!
+        longi = coord.longitude
+        
+        let requsicaoDeBusca = NSFetchRequest(entityName: "Vendas")
+        
+        requsicaoDeBusca.predicate = NSPredicate(format: "latitude == %@ AND longitude == %@", lat, longi);
+        
+        do{
+            let resultados = try sharedContext.executeFetchRequest(requsicaoDeBusca)
+            print(resultados)
+            return resultados as! [Vendas]
+            
+        }catch let error as NSError{
+            print("Não foi possível salvar \(error). \(error.userInfo)")
+        }
+        
+        return []
+    }
+    
     func clearData() {
-        let requsicaoDeBusca = NSFetchRequest(entityName: "Venda")
+        let requsicaoDeBusca = NSFetchRequest(entityName: "Vendas")
         let delReq = NSBatchDeleteRequest(fetchRequest: requsicaoDeBusca)
         
         do{
@@ -114,6 +143,7 @@ class VendaPersistence: NSObject, NSFetchedResultsControllerDelegate {
         ]
         //print(dictionary)
         let newVenda = Vendas(dictionary: dictionary, context: sharedContext)
+        print(newVenda)
         CoreDataStackManager.sharedInstance().saveContext()
         return newVenda
     }

@@ -14,7 +14,7 @@ class UserTableViewController: UITableViewController {
 
     var idOfFacebook = String()
     var vendaPersistence = VendaPersistence()
-    var vendasOfUser = [Vendas]
+    var vendasOfUser = [Vendas]()
     
    @IBOutlet weak var navItem: UINavigationItem!
     let buttonFacebook = UIButton()
@@ -33,6 +33,7 @@ class UserTableViewController: UITableViewController {
 
     override func viewWillAppear(animated: Bool) {
        verifyIfUserIslogged()
+        reloadTableView()
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -40,15 +41,15 @@ class UserTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return VendasSingletonOfUser.arrayDeVendasDoUsuario.count
+        return vendasOfUser.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("vendaCell", forIndexPath: indexPath) as! VendaTableViewCell
         
-        cell.labelNome.text = "\(VendasSingletonOfUser.arrayDeVendasDoUsuario[indexPath.row].nome)"
-        cell.labelData.text = "\(VendasSingletonOfUser.arrayDeVendasDoUsuario[indexPath.row].data)"
+        cell.labelNome.text = "\(vendasOfUser[indexPath.row].nome)"
+        cell.labelData.text = "\(vendasOfUser[indexPath.row].data)"
         
         return cell
     }
@@ -56,10 +57,6 @@ class UserTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let app = UIApplication.sharedApplication()
         actionDetailVenda()
-//        if let toOpen = studentsModel[indexPath.row].mediaURL {
-//        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-//        app.openURL(NSURL(string: "\(StudentsSingleton.arrayOfStudents[indexPath.row].mediaURL)")!)
-//         }
         
     }
     
@@ -85,27 +82,14 @@ class UserTableViewController: UITableViewController {
             let barButtonFacebook = UIBarButtonItem(customView: buttonFacebook)
             self.navItem.rightBarButtonItem = barButtonFacebook
             self.navItem.title = "Efetue Login"
-            VendasSingletonOfUser.arrayDeVendasDoUsuario.removeAll()
+            vendasOfUser.removeAll()
             reloadTableView()
         }
     }
     
     func vendasOfUser(id: String){
-        vendaPersistence.buscarVendasDeUsuarios(idOfFacebook)
-        
-        VendasSingletonOfUser.arrayDeVendasDoUsuario.removeAll()
-        for venda in VendasSingleton.arrayDeVendas {
-            var idOfVenda = ""
-            idOfVenda = "\(venda.id_facebook)"
-            if idOfVenda == id{
-                print("deu certo!!")
-                
-                //VendasSingletonOfUser.arrayDeVendasDoUsuario.append(Vendas(data: venda.data, latitude: venda.latitude, longitude: venda.longitude, forma_pagamento: venda.forma_pagamento, hora_inicio: venda.hora_inicio, hora_termino: venda.hora_termino, nome: venda.nome, status: venda.status, id: venda.id))
-            }
-        }
-        
-       reloadTableView()
-        
+        vendasOfUser = vendaPersistence.buscarVendasDeUsuarios(id)
+        reloadTableView()
     }
     
     
@@ -118,8 +102,8 @@ class UserTableViewController: UITableViewController {
             let indexPaths = tableView.indexPathForSelectedRow
             //let indexPath = indexPaths![0] as! NSIndexPath
             let detalhaVenda : DetalhVendaTableViewController = segue.destinationViewController as! DetalhVendaTableViewController
-            print(VendasSingletonOfUser.arrayDeVendasDoUsuario[(indexPaths?.row)!])
-            detalhaVenda.venda = VendasSingletonOfUser.arrayDeVendasDoUsuario[(indexPaths?.row)!]
+            //print(VendasSingletonOfUser.arrayDeVendasDoUsuario[(indexPaths?.row)!])
+            detalhaVenda.venda = vendasOfUser[(indexPaths?.row)!]
 //            print(photos[indexPath.row])
             print("Detalhou!")
         }
@@ -147,9 +131,7 @@ class UserTableViewController: UITableViewController {
                             print("result \(result)")
                             if let idFacebook = result["id"]{
                                 print(idFacebook)
-                                self.vendasOfUser = self.vendaPersistence.buscarVendasDeUsuarios("\(idFacebook!)")
-                                //var teste = "\(idFacebook!)"
-                                //self.vendasOfUser(teste)
+                                self.idOfFacebook = (idFacebook as? String)!
                             }
                         }
                         else
@@ -177,7 +159,7 @@ class UserTableViewController: UITableViewController {
     }
     
     func addButton() {
-        self.navItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addVenda:")
+        self.navItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(UserTableViewController.addVenda(_:)))
     }
     
     func addVenda(sender: UIButton) {
