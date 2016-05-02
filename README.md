@@ -10,7 +10,7 @@ If the user is logged, he will can edit, add and delete one or many sales.
 
 How to use app:
 
-![alt tag](https://drive.google.com/open?id=0B8sRyb23ajYnbkpIUEdtdzBsTUU)
+![alt tag](https://drive.google.com/file/d/0B8sRyb23ajYnbkpIUEdtdzBsTUU/view?usp=sharing)
 
 
 
