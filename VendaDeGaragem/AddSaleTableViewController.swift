@@ -15,9 +15,9 @@ import MapKit
 class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, CLLocationManagerDelegate {
     
     var statusVenda = [String]()
-    var statusSelected = "Conformada"
+    var statusSelected = "Confirmada"
     var idOfUser = ""
-    let locationManager = CLLocationManager()
+    var locationManager: CLLocationManager!
     
     var overlayView = UIView()
     var activityIndicator = UIActivityIndicatorView()
@@ -43,23 +43,25 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
     @IBOutlet weak var pickerStatus: UIPickerView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        locationManager = CLLocationManager()
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard)))
         if verifyIfIsUpdate(){
             textFieldNome.text = venda.nome!
         }
         
+       
+        
         statusVenda = ["Confirmada", "Prevista", "Encerrada"]
         self.locationManager.delegate = self
         
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        self.locationManager.requestAlwaysAuthorization()
-        self.locationManager.startUpdatingLocation()
+       // self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+       // self.locationManager.requestAlwaysAuthorization()
+        //self.locationManager.startUpdatingLocation()
     }
     
     override func viewWillAppear(animated: Bool) {
         getFacebookId()
-        locationManagers(locationManager, didChangeAuthorizationStatus: .AuthorizedAlways)
+        locationManagers(locationManager, didChangeAuthorizationStatus: .NotDetermined)
     }
     
     func locationManagers(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
@@ -67,6 +69,7 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
         case .NotDetermined:
             // If status has not yet been determied, ask for authorization
             manager.requestWhenInUseAuthorization()
+            coordinates = getCoordinates()
             break
         case .AuthorizedWhenInUse:
             // If authorized when in use
@@ -87,6 +90,10 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
         }
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+         coordinates = getCoordinates()
+    }
     
     @IBAction func publicarVenda(sender: AnyObject) {
        
@@ -240,6 +247,8 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
     }
     
     func getCoordinates() -> CLLocationCoordinate2D {
+        //locationManager.requestLocation()
+        print(locationManager.location?.coordinate)
         return locationManager.location!.coordinate
     }
 

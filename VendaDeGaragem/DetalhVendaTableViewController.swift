@@ -147,6 +147,14 @@ class DetalhVendaTableViewController: UITableViewController, MKMapViewDelegate {
                 if(error == nil)
                 {
                     print("result \(result)")
+                    if let idFacebook = result["id"]{
+                        print(idFacebook)
+                        if (idFacebook as? String)! == self.venda.id_facebook{
+                            self.editButton(true)
+                        }else{
+                            self.editButton(false)
+                        }
+                    }
                 }
                 else
                 {
@@ -154,7 +162,7 @@ class DetalhVendaTableViewController: UITableViewController, MKMapViewDelegate {
                 }
             })
             
-            editButton(true)
+            //editButton(true)
         }
         
     }
