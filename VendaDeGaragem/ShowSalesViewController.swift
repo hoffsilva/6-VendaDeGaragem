@@ -33,7 +33,7 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -121,7 +121,7 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
     }
     
     func putSalesOnMap() {
-        getVendas()
+       // getVendas()
         parseConvenience.gettingVendas({ (networkConectionError) in
             if networkConectionError == true{
                 let alert = UIAlertController(title: ":(", message: "Internet conection was lost or server is offline!", preferredStyle: UIAlertControllerStyle.Alert)
@@ -131,6 +131,9 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
                 return
                 
             }else{
+                print(self.vendas)
+                
+                self.getVendas()
                 print(self.vendas)
                 for venda in self.vendas {
                     // print("\(student.firstName) \(student.mapString)")
@@ -164,9 +167,11 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
           
         })
         
-        
+        dispatch_async(dispatch_get_main_queue()) { 
             self.mapView.addAnnotations(self.annotations)
             print(self.annotations)
+        }
+        
    
     }
     

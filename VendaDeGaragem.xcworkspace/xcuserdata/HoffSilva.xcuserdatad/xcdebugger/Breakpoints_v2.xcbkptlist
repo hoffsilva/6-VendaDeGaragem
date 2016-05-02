@@ -84,11 +84,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "VendaDeGaragem/ShowSalesViewController.swift"
-            timestampString = "483849872.605346"
+            timestampString = "483899017.05187"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
             landmarkName = "putSalesOnMap()"
             landmarkType = "5">
          </BreakpointContent>
@@ -132,27 +132,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "VendaDeGaragem/ShowSalesViewController.swift"
-            timestampString = "483849872.605346"
+            timestampString = "483899017.05187"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "138"
-            endingLineNumber = "138"
-            landmarkName = "putSalesOnMap()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VendaDeGaragem/ShowSalesViewController.swift"
-            timestampString = "483849872.605346"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "198"
-            endingLineNumber = "198"
+            startingLineNumber = "203"
+            endingLineNumber = "203"
             landmarkName = "mapView(_:viewForAnnotation:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -179,13 +163,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "VendaDeGaragem/ParseConvenience.swift"
-            timestampString = "483890195.754541"
+            filePath = "VendaDeGaragem/ShowSalesViewController.swift"
+            timestampString = "483899017.05187"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
-            landmarkName = "deletarVenda(_:latitude:longitude:forma_pagamento:hora_inicio:hora_termino:nome:status:id_facebook:id_azure:)"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
+            landmarkName = "putSalesOnMap()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

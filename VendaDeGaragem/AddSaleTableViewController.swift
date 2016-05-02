@@ -206,7 +206,12 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
 
         }
         else{
-            saveSale()
+            if venda != nil{
+                updateSale()
+            }else{
+                saveSale()
+            }
+            
             
         }
         

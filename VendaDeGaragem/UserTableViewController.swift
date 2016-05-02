@@ -98,7 +98,7 @@ class UserTableViewController: UITableViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-       // if segue.identifier == "detalhaVenda"{
+        if segue.identifier == "detalhaVenda"{
             let indexPaths = tableView.indexPathForSelectedRow
             //let indexPath = indexPaths![0] as! NSIndexPath
             
@@ -111,7 +111,7 @@ class UserTableViewController: UITableViewController {
             //detalhaVenda.venda =
 //            print(photos[indexPath.row])
             print("Detalhou!")
-        //}
+        }
     }
     
     func loginButtonClicked() {
