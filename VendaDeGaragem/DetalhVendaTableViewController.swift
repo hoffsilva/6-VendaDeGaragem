@@ -31,7 +31,7 @@ class DetalhVendaTableViewController: UITableViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = "sdada"
+       // navigationItem.title = "sdada"
         //asasa.title = "\(venda.nome!)"
         
         addPinOnMap()
@@ -120,6 +120,9 @@ class DetalhVendaTableViewController: UITableViewController, MKMapViewDelegate {
         }
     }
     
+    @IBAction func closeDetail(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     func statusDaVenda() {
         if venda.status == "Iniciada"{
             labelStatus.text = "Corre! Acho que ainda dá tempo de aproveitar."

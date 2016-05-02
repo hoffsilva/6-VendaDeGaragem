@@ -204,12 +204,16 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "detalharVenda"{
-            
-            let detalharVenda: DetalhVendaTableViewController = segue.destinationViewController as! DetalhVendaTableViewController
-            
-            detalharVenda.venda = vendaTemp[0]
-        }
+//        if segue.identifier == "detalharVenda"{
+//            
+//            let detalharVenda: DetalhVendaTableViewController = segue.destinationViewController as! DetalhVendaTableViewController
+//            
+//            detalharVenda.venda = vendaTemp[0]
+//        }
+        let nav  = segue.destinationViewController as! UINavigationController
+        //let detalharVenda: DetalhVendaTableViewController = segue.destinationViewController as! DetalhVendaTableViewController
+        let detalharVenda = nav.topViewController as! DetalhVendaTableViewController
+        detalharVenda.venda = vendaTemp[0]
     }
     
     

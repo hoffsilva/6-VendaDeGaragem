@@ -18,6 +18,7 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
     var statusSelected = "iniciada"
     var idOfUser = ""
     let locationManager = CLLocationManager()
+    
     var overlayView = UIView()
     var activityIndicator = UIActivityIndicatorView()
     var coordinates = CLLocationCoordinate2D()
@@ -49,8 +50,9 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
         
         statusVenda = ["Iniciada", "Prevista", "Encerrada"]
         self.locationManager.delegate = self
+        
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        //self.locationManager.requestAlwaysAuthorization()
+        self.locationManager.requestAlwaysAuthorization()
         self.locationManager.startUpdatingLocation()
         
         switch CLLocationManager.authorizationStatus() {

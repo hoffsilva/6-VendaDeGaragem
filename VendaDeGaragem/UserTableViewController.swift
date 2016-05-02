@@ -98,15 +98,20 @@ class UserTableViewController: UITableViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "detalhaVenda"{
+       // if segue.identifier == "detalhaVenda"{
             let indexPaths = tableView.indexPathForSelectedRow
             //let indexPath = indexPaths![0] as! NSIndexPath
-            let detalhaVenda : DetalhVendaTableViewController = segue.destinationViewController as! DetalhVendaTableViewController
+            
+            let nav  = segue.destinationViewController as! UINavigationController
+            //let detalharVenda: DetalhVendaTableViewController = segue.destinationViewController as! DetalhVendaTableViewController
+            let detalharVenda = nav.topViewController as! DetalhVendaTableViewController
+            detalharVenda.venda = vendasOfUser[(indexPaths?.row)!]
+            //let detalhaVenda : DetalhVendaTableViewController = segue.destinationViewController as! DetalhVendaTableViewController
             //print(VendasSingletonOfUser.arrayDeVendasDoUsuario[(indexPaths?.row)!])
-            detalhaVenda.venda = vendasOfUser[(indexPaths?.row)!]
+            //detalhaVenda.venda =
 //            print(photos[indexPath.row])
             print("Detalhou!")
-        }
+        //}
     }
     
     func loginButtonClicked() {
