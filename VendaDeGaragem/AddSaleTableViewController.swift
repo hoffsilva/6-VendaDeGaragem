@@ -142,6 +142,7 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
     }
     
     func updateSale() {
+        parse.atualizarVenda(formataData(datePickerData), latitude: String(coordinates.latitude), longitude: String(coordinates.longitude), forma_pagamento: getCard(), hora_inicio: formataHora(datePickerHoraInicio), hora_termino: formataHora(datePickerHoraTermino), nome: textFieldNome.text!, status: statusSelected, id_facebook: idOfUser, id_azure: venda.id_azure)
         
     }
     

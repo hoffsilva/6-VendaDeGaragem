@@ -48,6 +48,26 @@ class ParseConvenience: NSObject {
     }
     
     
+    func atualizarVenda(data : String, latitude: String, longitude: String, forma_pagamento : String, hora_inicio: String, hora_termino: String, nome: String, status: String, id_facebook: String, id_azure: String) {
+        let table = client.tableWithName("Venda")
+        var itemToUpdate:NSDictionary = ["data":data,
+                                         "forma_pagamento": forma_pagamento,
+                                         "hora_inicio": hora_inicio,
+                                         "hora_termino": hora_termino,
+                                         "id_facebook": id_facebook,
+                                         "latitude": latitude,
+                                         "longitude": longitude,
+                                         "nome": nome,
+                                         "status": status]
+        table.update(itemToUpdate as! [NSObject : AnyObject], parameters: ["id" : id_azure]) { (request, error) in
+            if (error != nil){
+                print("error: \(error)")
+            }
+            else{
+                print("Success!")
+            }
+        }
+    }
     
     func gettingVendas(onCompletion: (networkConectionError : Bool) ->()){
        // curl "https://vendadegaragem.firebaseio.com/users.json"

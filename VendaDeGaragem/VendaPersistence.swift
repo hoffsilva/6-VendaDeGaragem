@@ -127,6 +127,23 @@ class VendaPersistence: NSObject, NSFetchedResultsControllerDelegate {
 
     }
     
+    func vendaPorIdAzure(id_azure: String) -> [Vendas] {
+        let requsicaoDeBusca = NSFetchRequest(entityName: "Vendas")
+        
+        requsicaoDeBusca.predicate = NSPredicate(format: "id_azure == %@", id_azure);
+        
+        do{
+            let resultados = try sharedContext.executeFetchRequest(requsicaoDeBusca)
+            print(resultados)
+            return resultados as! [Vendas]
+            
+        }catch let error as NSError{
+            print("Não foi possível salvar \(error). \(error.userInfo)")
+        }
+        return []
+    }
+    
+    
     func saveVenda(data: String, latitude: String, longitude: String, forma_pagamento: String, hora_inicio: String, hora_termino: String, nome: String, status: String , id_facebook: String, id_azure: String ) -> Vendas {
         //print(coordinate)
         let dictionary: [String : AnyObject] = [
