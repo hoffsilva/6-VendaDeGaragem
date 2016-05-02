@@ -8,6 +8,10 @@ All garage sale will appear on map, if the user doesn't have facebook account th
 
 If the user is logged, he will can edit, add and delete one or many sales.
 
+How to use app:
+
+![alt tag](https://drive.google.com/open?id=0B8sRyb23ajYnbkpIUEdtdzBsTUU)
+
 
 
 
