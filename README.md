@@ -1,12 +1,12 @@
 # 6-VendaDeGaragem
 
-Publish Garage Sale is the app's towards.
+The main feature on this app is to publish a garage sale.
 
-To publish a Garage Sale the user will need login using facebook account.
+To publish a garage sale the user will need to login using a facebook account.
 
-All garage sale will appear on map, if the user doesn't have facebook account the user will can see the garage sales published, but he couldn't publish a garage sale.
+All garage sales will appear on the map, if the user doesn't have facebook account the user will be able to see the garage sales published, but the user couldn't publish an event.
 
-If the user is logged, he will can edit, add and delete one or many sales.
+If the user is logged, it's possible to edit, add and delete one or many sales.
 
 How to use app:
 
