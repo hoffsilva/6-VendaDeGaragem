@@ -27,7 +27,6 @@
 		0BEDDEC71CB59DE000F04FE9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0BEDDEC51CB59DE000F04FE9 /* Main.storyboard */; };
 		0BEDDEC91CB59DE000F04FE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0BEDDEC81CB59DE000F04FE9 /* Assets.xcassets */; };
 		0BEDDECC1CB59DE000F04FE9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0BEDDECA1CB59DE000F04FE9 /* LaunchScreen.storyboard */; };
-		BE96345403B1B67C4C538497 /* Pods_VendaDeGaragem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE981E97B2B7A2DE4E9628A /* Pods_VendaDeGaragem.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,7 +64,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0BCBE7F11CCBA34300A918D8 /* FBSDKShareKit.framework in Frameworks */,
-				BE96345403B1B67C4C538497 /* Pods_VendaDeGaragem.framework in Frameworks */,
 				0BCBE7EF1CCBA34300A918D8 /* FBSDKCoreKit.framework in Frameworks */,
 				0BCBE7F01CCBA34300A918D8 /* FBSDKLoginKit.framework in Frameworks */,
 				0B58BF851CD427160072E24F /* WindowsAzureMobileServices.framework in Frameworks */,
@@ -146,12 +144,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0BEDDED01CB59DE100F04FE9 /* Build configuration list for PBXNativeTarget "VendaDeGaragem" */;
 			buildPhases = (
-				C1924CB50439123AC731EA85 /* Check Pods Manifest.lock */,
 				0BEDDEBA1CB59DE000F04FE9 /* Sources */,
 				0BEDDEBB1CB59DE000F04FE9 /* Frameworks */,
 				0BEDDEBC1CB59DE000F04FE9 /* Resources */,
-				50FF0D05E4121C9514D504CA /* Embed Pods Frameworks */,
-				888B84A537521D868F3EF5E2 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -213,54 +208,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		50FF0D05E4121C9514D504CA /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VendaDeGaragem/Pods-VendaDeGaragem-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		888B84A537521D868F3EF5E2 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VendaDeGaragem/Pods-VendaDeGaragem-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C1924CB50439123AC731EA85 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0BEDDEBA1CB59DE000F04FE9 /* Sources */ = {
