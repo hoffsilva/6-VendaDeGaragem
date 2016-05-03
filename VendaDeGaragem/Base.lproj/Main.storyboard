@@ -376,7 +376,7 @@
         <scene sceneID="8iX-Ez-wE3">
             <objects>
                 <navigationController id="Yyf-Ot-Pcw" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" selectedImage="map" id="rxf-hP-830"/>
+                    <tabBarItem key="tabBarItem" title="" image="plate" selectedImage="plate" id="rxf-hP-830"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="BsK-9f-AUu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -691,7 +691,7 @@
         <scene sceneID="bCp-pl-kMJ">
             <objects>
                 <navigationController id="b3i-Av-En0" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" selectedImage="map" id="w0Z-Uf-Ga4"/>
+                    <tabBarItem key="tabBarItem" title="" image="map" selectedImage="map" id="w0Z-Uf-Ga4"/>
                     <navigationBar key="navigationBar" hidden="YES" contentMode="scaleToFill" id="pe2-t3-raM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -726,6 +726,7 @@
     <resources>
         <image name="facebookOnline" width="22" height="22"/>
         <image name="map" width="100" height="100"/>
+        <image name="plate" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Wcm-Py-tXX"/>

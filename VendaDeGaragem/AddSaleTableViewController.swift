@@ -92,7 +92,7 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-         coordinates = getCoordinates()
+         //coordinates = getCoordinates()
     }
     
     @IBAction func publicarVenda(sender: AnyObject) {
@@ -249,7 +249,7 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
     func getCoordinates() -> CLLocationCoordinate2D {
         //locationManager.requestLocation()
         print(locationManager.location?.coordinate)
-        return locationManager.location!.coordinate
+        return (locationManager.location?.coordinate)!
     }
 
     override func didReceiveMemoryWarning() {
