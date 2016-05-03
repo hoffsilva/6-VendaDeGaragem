@@ -120,13 +120,25 @@ class UserTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
-        parse.deletarVenda(vendasOfUser[indexPath.row].id_azure)
+        parse.deletarVenda(vendasOfUser[indexPath.row].id_azure) { (networkConectionError) in
+            
+            if networkConectionError == true{
+                let alert = UIAlertController(title: ":(", message: "Internet conection was lost or server is offline!", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+            }else{
+                CoreDataStackManager.sharedInstance().managedObjectContext.deleteObject(self.vendasOfUser[indexPath.row])
+                
+                self.vendasOfUser.removeAtIndex(indexPath.row)
+                
+                tableView.reloadData()
+            }
+            
+        }
         
-        CoreDataStackManager.sharedInstance().managedObjectContext.deleteObject(self.vendasOfUser[indexPath.row])
+       
         
-        vendasOfUser.removeAtIndex(indexPath.row)
-        
-        tableView.reloadData()
+       
         
     }
     

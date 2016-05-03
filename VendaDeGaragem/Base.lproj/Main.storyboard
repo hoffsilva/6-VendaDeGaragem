@@ -30,14 +30,19 @@
                                     <navigationItem title="Vendas Publicadas" id="kgp-ru-oKA"/>
                                 </items>
                             </navigationBar>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="eT2-uD-Z7S">
+                                <rect key="frame" x="290" y="322" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="eT2-uD-Z7S" firstAttribute="centerX" secondItem="X2h-lU-c1O" secondAttribute="centerX" id="6Zk-yG-BfB"/>
                             <constraint firstItem="X2h-lU-c1O" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Blf-2p-smA"/>
                             <constraint firstItem="RCt-6V-uys" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="EJD-vi-kQd"/>
                             <constraint firstItem="X2h-lU-c1O" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="GI0-dw-4Lz"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="X2h-lU-c1O" secondAttribute="bottom" id="Oc7-dM-Kvd"/>
                             <constraint firstAttribute="trailing" secondItem="X2h-lU-c1O" secondAttribute="trailing" id="gmr-mm-WKY"/>
+                            <constraint firstItem="eT2-uD-Z7S" firstAttribute="centerY" secondItem="X2h-lU-c1O" secondAttribute="centerY" id="i0S-cK-24x"/>
                             <constraint firstAttribute="trailing" secondItem="RCt-6V-uys" secondAttribute="trailing" id="xPZ-Zo-a1L"/>
                             <constraint firstItem="RCt-6V-uys" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="20" id="z3O-Ed-djg"/>
                         </constraints>
@@ -46,6 +51,7 @@
                     <navigationItem key="navigationItem" id="zdi-tj-tuJ"/>
                     <connections>
                         <outlet property="mapView" destination="X2h-lU-c1O" id="wCV-JA-PZm"/>
+                        <outlet property="mapViewActivityIndicator" destination="eT2-uD-Z7S" id="rHu-iQ-l0w"/>
                         <outlet property="navItem" destination="kgp-ru-oKA" id="uLr-1k-CTF"/>
                         <segue destination="Lzg-Uu-YsM" kind="show" identifier="detalharVenda" id="Wcm-Py-tXX"/>
                     </connections>
@@ -725,8 +731,8 @@
     </scenes>
     <resources>
         <image name="facebookOnline" width="22" height="22"/>
-        <image name="map" width="100" height="100"/>
-        <image name="plate" width="100" height="100"/>
+        <image name="map" width="22" height="22"/>
+        <image name="plate" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Wcm-Py-tXX"/>

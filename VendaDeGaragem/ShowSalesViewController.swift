@@ -25,7 +25,10 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
     var parseConvenience = ParseConvenience()
     var latituteOfLocation = 0.0
     var longitudeOfLocation = 0.0
+    var overlayView = UIView()
+    var activityIndicator = UIActivityIndicatorView()
     
+    @IBOutlet weak var mapViewActivityIndicator: UIActivityIndicatorView!
     let dropPin = MKPointAnnotation()
     var annotations = [MKPointAnnotation]()
     var vendaTemp = [Vendas]()
@@ -120,11 +123,15 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
     }
     
     func putSalesOnMap() {
+        
         parseConvenience.gettingVendas({ (networkConectionError) in
+            
             if networkConectionError == true{
                 let alert = UIAlertController(title: ":(", message: "Internet conection was lost or server is offline!", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
+                self.mapViewActivityIndicator.stopAnimating()
+               
                 return
                 
             }else{
@@ -148,7 +155,7 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
                 self.mapView.addAnnotations(self.annotations)
             }
             
-           
+           self.mapViewActivityIndicator.stopAnimating()
           
         })
         

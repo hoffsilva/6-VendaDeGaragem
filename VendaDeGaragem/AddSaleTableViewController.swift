@@ -116,32 +116,50 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
     func saveSale() {
     
         print(formataData(datePickerData), String(coordinates.latitude), String(coordinates.longitude),  getCard(),  formataHora(datePickerHoraInicio),  formataHora(datePickerHoraTermino), textFieldNome.text!,  statusSelected ,  idOfUser)
+        parse.saveVenda(formataData(datePickerData), latitude: String(coordinates.latitude), longitude: String(coordinates.longitude), forma_pagamento: getCard(), hora_inicio: formataHora(datePickerHoraInicio), hora_termino: formataHora(datePickerHoraTermino), nome: textFieldNome.text!, status: statusSelected , id: idOfUser) { (networkConectionError) in
+            
+            if networkConectionError == true{
+                let alert = UIAlertController(title: ":(", message: "Internet conection was lost or server is offline!", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+            }else{
+                self.vendaPersistence.saveVenda(self.formataData(self.datePickerData), latitude: String(self.coordinates.latitude), longitude: String(self.coordinates.longitude), forma_pagamento: self.getCard(), hora_inicio: self.formataHora(self.datePickerHoraInicio), hora_termino: self.formataHora(self.datePickerHoraTermino), nome: self.textFieldNome.text!, status: self.statusSelected, id_facebook: self.idOfUser, id_azure: self.venda.id_azure)
+                
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
+        }
         
-        parse.saveVenda(formataData(datePickerData), latitude: String(coordinates.latitude), longitude: String(coordinates.longitude), forma_pagamento: getCard(), hora_inicio: formataHora(datePickerHoraInicio), hora_termino: formataHora(datePickerHoraTermino), nome: textFieldNome.text!, status: statusSelected , id: idOfUser)
-        
-        vendaPersistence.saveVenda(formataData(datePickerData), latitude: String(coordinates.latitude), longitude: String(coordinates.longitude), forma_pagamento: getCard(), hora_inicio: formataHora(datePickerHoraInicio), hora_termino: formataHora(datePickerHoraTermino), nome: textFieldNome.text!, status: statusSelected, id_facebook: idOfUser, id_azure: "")
-        
-        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func updateSale() {
-        parse.atualizarVenda(formataData(datePickerData), latitude: String(coordinates.latitude), longitude: String(coordinates.longitude), forma_pagamento: getCard(), hora_inicio: formataHora(datePickerHoraInicio), hora_termino: formataHora(datePickerHoraTermino), nome: textFieldNome.text!, status: statusSelected, id_facebook: idOfUser, id_azure: venda.id_azure)
-       
-        let objectVenda = vendaPersistence.vendaPorIdAzure(venda.id_azure)
-        objectVenda[0].data = formataData(datePickerData)
-        objectVenda[0].latitude = String(coordinates.latitude)
-        objectVenda[0].longitude = String(coordinates.longitude)
-        objectVenda[0].forma_pagamento = formataHora(datePickerHoraInicio)
-        objectVenda[0].hora_inicio = formataHora(datePickerHoraTermino)
-        objectVenda[0].hora_termino = formataHora(datePickerHoraInicio)
-        objectVenda[0].nome = textFieldNome.text!
-        objectVenda[0].status = statusSelected
-        objectVenda[0].id_facebook = idOfUser
         
-        self.dismissViewControllerAnimated(true, completion: nil)
-        
-        parse.getVendas { (networkConectionError) in
-            print("ok")
+        parse.atualizarVenda(formataData(datePickerData), latitude: String(coordinates.latitude), longitude: String(coordinates.longitude), forma_pagamento: getCard(), hora_inicio: formataHora(datePickerHoraInicio), hora_termino: formataHora(datePickerHoraTermino), nome: textFieldNome.text!, status: statusSelected, id_facebook: idOfUser, id_azure: venda.id_azure) { (networkConectionError) in
+            if networkConectionError == true{
+                let alert = UIAlertController(title: ":(", message: "Internet conection was lost or server is offline!", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+            }else{
+                let objectVenda = self.vendaPersistence.vendaPorIdAzure(self.venda.id_azure)
+                objectVenda[0].data = self.formataData(self.datePickerData)
+                objectVenda[0].latitude = String(self.coordinates.latitude)
+                objectVenda[0].longitude = String(self.coordinates.longitude)
+                objectVenda[0].forma_pagamento = self.formataHora(self.datePickerHoraInicio)
+                objectVenda[0].hora_inicio = self.formataHora(self.datePickerHoraTermino)
+                objectVenda[0].hora_termino = self.formataHora(self.datePickerHoraInicio)
+                objectVenda[0].nome = self.textFieldNome.text!
+                objectVenda[0].status = self.statusSelected
+                objectVenda[0].id_facebook = self.idOfUser
+              //  objectVenda[0].id_azure = self.venda.id_azure
+                
+               // CoreDataStackManager.sharedInstance().saveContext()
+                
+                self.parse.gettingVendas({ (networkConectionError) in
+                    print("Ok!")
+                })
+                
+                self.dismissViewControllerAnimated(true, completion: nil)
+                
+            }
         }
         
     }

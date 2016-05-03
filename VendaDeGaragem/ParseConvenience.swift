@@ -18,7 +18,7 @@ class ParseConvenience: NSObject {
     
     var vendaPersistence = VendaPersistence()
     
-    func saveVenda(data : String, latitude: String, longitude: String, forma_pagamento : String, hora_inicio: String, hora_termino: String, nome: String, status: String, id: String) {
+    func saveVenda(data : String, latitude: String, longitude: String, forma_pagamento : String, hora_inicio: String, hora_termino: String, nome: String, status: String, id: String, onCompletion: (networkConectionError : Bool) ->() )  {
         
         let table = client.tableWithName("Venda")
         var itemToInsert:NSDictionary = ["data":data,
@@ -35,9 +35,15 @@ class ParseConvenience: NSObject {
                          completion: {
                             insertedItem, error in
                             if (error != nil){
+                                dispatch_async(dispatch_get_main_queue(), { 
+                                    onCompletion(networkConectionError: true)
+                                })
                                 print("error: \(error)")
                             }
                             else{
+                                dispatch_async(dispatch_get_main_queue(), {
+                                    onCompletion(networkConectionError: false)
+                                })
                                 print("Success!")
                             }
             }
@@ -45,19 +51,25 @@ class ParseConvenience: NSObject {
         
     }
     
-    func deletarVenda(id_azure: String) {
+    func deletarVenda(id_azure: String, onCompletion: (networkConectionError : Bool) ->()) {
         let table = client.tableWithName("Venda")
         table.deleteWithId(id_azure) { (result, error) in
             if (error != nil){
+                dispatch_async(dispatch_get_main_queue(), {
+                    onCompletion(networkConectionError: true)
+                })
                 print("error: \(error)")
             }
             else{
+                dispatch_async(dispatch_get_main_queue(), {
+                    onCompletion(networkConectionError: false)
+                })
                 print("Success!")
             }
         }
     }
     
-    func atualizarVenda(data : String, latitude: String, longitude: String, forma_pagamento : String, hora_inicio: String, hora_termino: String, nome: String, status: String, id_facebook: String, id_azure: String) {
+    func atualizarVenda(data : String, latitude: String, longitude: String, forma_pagamento : String, hora_inicio: String, hora_termino: String, nome: String, status: String, id_facebook: String, id_azure: String, onCompletion: (networkConectionError : Bool) ->() ) {
         let table = client.tableWithName("Venda")
         var oldItem:NSDictionary = ["data":data,
                                          "forma_pagamento": forma_pagamento,
@@ -83,8 +95,14 @@ class ParseConvenience: NSObject {
         
         table.update(newItem as [NSObject : AnyObject]) { (result, error) in
             if (error != nil){
+                dispatch_async(dispatch_get_main_queue(), {
+                    onCompletion(networkConectionError: true)
+                })
                 print("error: \(error)")
             }else{
+                dispatch_async(dispatch_get_main_queue(), {
+                    onCompletion(networkConectionError: false)
+                })
                 print("Success!")
             }
         }
@@ -97,6 +115,9 @@ class ParseConvenience: NSObject {
         table.readWithCompletion { (result, error) in
             if let error = error{
                 print(error)
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    onCompletion(networkConectionError: true)
+                })
                 return
             }else if let itens = result.items{
                 if itens.count > 0{
@@ -117,138 +138,9 @@ class ParseConvenience: NSObject {
                 })
             }
         }
-        
-        
-        /*
-         
-         readWithCompletion { (result, error) in
-         if let error = error{
-         print(error)
-         }else if let itens = result?.items{
-         VendasSingleton.arrayDeVendas.removeAll()
-         print(itens)
-         if itens.count > 0{
-         for venda in itens{
-         VendasSingleton.arrayDeVendas.append(Vendas(data: venda["data"], latitude: venda["latitude"], longitude: venda["longitude"], forma_pagamento: venda["forma_pagamento"], hora_inicio: venda["hora_inicio"], hora_termino: venda["hora_termino"], nome: venda["nome"], status: venda["status"], id: venda["id"]))
-         }
-         }
-         }
-         */
-        
-//        let query = table.queryWithPredicate(<#T##predicate: NSPredicate!##NSPredicate!#>)
-        //print(query)
-        
-//        let task = session.dataTaskWithRequest(request) { data, response, error in
-//            if error == nil { // Handle error...
-//                let parsedResult: AnyObject!
-//                do {
-//                    parsedResult = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments)
-//                    print(parsedResult)
-//                    } catch {
-//                    parsedResult = nil
-//                    return
-//                }
-//                
-//                
-//                if let arrayOfVendas = parsedResult["vendas"] as? [String:AnyObject]{
-//                        var i=1
-//                    VendasSingleton.arrayDeVendas.removeAll()
-//                        for vendas in arrayOfVendas{
-//                            //var venda = String(format: "venda%d", i)
-//                            if let vendaCurrent = vendas.1 as? [String:AnyObject]{
-//                                VendasSingleton.arrayDeVendas.append(
-//                                    Vendas(data: (vendaCurrent["data"] as? String)!,
-//                                    latitude: (vendaCurrent["latitude"] as? String)!,
-//                                    longitude: (vendaCurrent["longitude"] as? String)!,
-//                                    forma_pagamento: (vendaCurrent["forma_pagamento"] as? String)!,
-//                                    hora_inicio: (vendaCurrent["hora_inicio"] as? String)!,
-//                                    hora_termino: (vendaCurrent["hora_termino"] as? String)!,
-//                                    nome: (vendaCurrent["nome"] as? String)!,
-//                                    status: (vendaCurrent["status"] as? String)!,
-//                                    id: (vendaCurrent["id"] as? String)!))
-//                                i = i+1
-//                            }
-//                            
-//                        }
-//                    }
-// 
-//                    
-//
-//                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-//                        onCompletion(networkConectionError: false)
-//                    })
-//
-//            }else{
-//                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-//                    onCompletion(networkConectionError: true)
-//                })
-//            }
-//            
-//            
-//            
-//            
-//            
-//        }
-//        task.resume()
     }
     
-    func getVendas(onCompletion: (networkConectionError : Bool) ->()){
-        // curl "https://vendadegaragem.firebaseio.com/users.json"
-        let request = NSMutableURLRequest(URL: NSURL(string: "https://vendadegaragem.firebaseio.com/vendas.json")!)
-        let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithRequest(request) { data, response, error in
-            if error == nil { // Handle error...
-                let parsedResult: AnyObject!
-                do {
-                    parsedResult = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments)
-                    print(parsedResult)
-                } catch {
-                    parsedResult = nil
-                    return
-                }
-                
-                
-                if let arrayOfVendas = parsedResult["vendas"] as? [String:AnyObject]{
-                    var i=1
-                    
-                    for vendas in arrayOfVendas{
-                       // var venda = String(format: "venda%d", i)
-//                        if let vendaCurrent = vendas.1 as? [String:AnyObject]{
-//                         VendasSingleton.arrayDeVendas.append(
-//                                Vendas(data: (vendaCurrent["data"] as? String)!,
-//                                    latitude: (vendaCurrent["latitude"] as? String)!,
-//                                    longitude: (vendaCurrent["longitude"] as? String)!,
-//                                    forma_pagamento: (vendaCurrent["forma_pagamento"] as? String)!,
-//                                    hora_inicio: (vendaCurrent["hora_inicio"] as? String)!,
-//                                    hora_termino: (vendaCurrent["hora_termino"] as? String)!,
-//                                    nome: (vendaCurrent["nome"] as? String)!,
-//                                    status: (vendaCurrent["status"] as? String)!,
-//                                    id: (vendaCurrent["id"] as? String)!))
-//                            i = i+1
-//                        }
-                        
-                    }
-                }
-                
-                
-                
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    onCompletion(networkConectionError: false)
-                })
-                
-            }else{
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    onCompletion(networkConectionError: true)
-                })
-            }
-            
-            
-            
-            
-            
-        }
-        task.resume()
-    }
+    
 
 
 }
