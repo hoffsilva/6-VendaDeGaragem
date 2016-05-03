@@ -16,13 +16,15 @@ class UserTableViewController: UITableViewController {
     var vendaPersistence = VendaPersistence()
     var vendasOfUser = [Vendas]()
     var parse = ParseConvenience()
+    var overlayView = UIView()
+    
+    var activityIndicator = UIActivityIndicatorView()
     
    @IBOutlet weak var navItem: UINavigationItem!
     let buttonFacebook = UIButton()
     override func viewDidLoad() {
         super.viewDidLoad()
         reloadTableView()
-        
     }
     
 
@@ -34,6 +36,7 @@ class UserTableViewController: UITableViewController {
 
     override func viewWillAppear(animated: Bool) {
        verifyIfUserIslogged()
+        reloadTableView()
         dispatch_async(dispatch_get_main_queue()) { 
             self.reloadTableView()
         }
@@ -71,24 +74,26 @@ class UserTableViewController: UITableViewController {
     func drawFacebbokButtonOnNavItem(size : Bool){
         buttonFacebook.frame = CGRectMake(0, 0, 0, 0)
         if size == true {
-            buttonFacebook.setImage(UIImage(named: "facebookOnline"), forState: .Normal)
-            buttonFacebook.addTarget(self, action: #selector(loginButtonClicked), forControlEvents: .TouchDown)
-            buttonFacebook.sizeToFit()
-            let barButtonFacebook = UIBarButtonItem(customView: buttonFacebook)
-            self.navigationController?.navigationItem.leftBarButtonItem = barButtonFacebook
-            self.navItem.leftBarButtonItem = barButtonFacebook
-            self.navItem.title = "Minhas Vendas"
+            managerFacebookLoginButtonAndNavItem("Minhas Vendas", imageOfButton: "facebookOnline")
             addButton()
         }else{
-            buttonFacebook.setImage(UIImage(named: "facebookOffline"), forState: .Normal)
-            buttonFacebook.addTarget(self, action: #selector(loginButtonClicked), forControlEvents: .TouchDown)
-            buttonFacebook.sizeToFit()
-            let barButtonFacebook = UIBarButtonItem(customView: buttonFacebook)
-            self.navItem.rightBarButtonItem = barButtonFacebook
-            self.navItem.title = "Efetue Login"
+            
+            managerFacebookLoginButtonAndNavItem("Efetue Login", imageOfButton: "facebookOffline")
             vendasOfUser.removeAll()
+            removeAddButton()
             reloadTableView()
         }
+    }
+    
+    func managerFacebookLoginButtonAndNavItem(titleOfNavItem: String, imageOfButton: String){
+        buttonFacebook.setImage(UIImage(named: imageOfButton), forState: .Normal)
+        buttonFacebook.addTarget(self, action: #selector(loginButtonClicked), forControlEvents: .TouchDown)
+        buttonFacebook.sizeToFit()
+        let barButtonFacebook = UIBarButtonItem(customView: buttonFacebook)
+        self.navigationController?.navigationItem.leftBarButtonItem = barButtonFacebook
+        self.navItem.leftBarButtonItem = barButtonFacebook
+        self.navItem.title = titleOfNavItem
+
     }
     
     func vendasOfUser(id: String){
@@ -104,17 +109,15 @@ class UserTableViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "detalhaVenda"{
             let indexPaths = tableView.indexPathForSelectedRow
-            //let indexPath = indexPaths![0] as! NSIndexPath
-            
             let nav  = segue.destinationViewController as! UINavigationController
-            //let detalharVenda: DetalhVendaTableViewController = segue.destinationViewController as! DetalhVendaTableViewController
             let detalharVenda = nav.topViewController as! DetalhVendaTableViewController
             detalharVenda.venda = vendasOfUser[(indexPaths?.row)!]
-            //let detalhaVenda : DetalhVendaTableViewController = segue.destinationViewController as! DetalhVendaTableViewController
-            //print(VendasSingletonOfUser.arrayDeVendasDoUsuario[(indexPaths?.row)!])
-            //detalhaVenda.venda =
-//            print(photos[indexPath.row])
             print("Detalhou!")
+        }else if segue.identifier == "addVenda"{
+            let nav  = segue.destinationViewController as! UINavigationController
+            let view = nav.viewControllers.first as? AddSaleTableViewController
+            
+            view?.table = self
         }
     }
     
@@ -122,15 +125,16 @@ class UserTableViewController: UITableViewController {
         
         parse.deletarVenda(vendasOfUser[indexPath.row].id_azure) { (networkConectionError) in
             
+            self.loadActivityIndicator()
             if networkConectionError == true{
-                let alert = UIAlertController(title: ":(", message: "Internet conection was lost or server is offline!", preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-                self.presentViewController(alert, animated: true, completion: nil)
+               self.showAlert(":(", message: "Internet conection was lost or server is offline!", preferredSytle: UIAlertControllerStyle.Alert)
+                self.overlayView.removeFromSuperview()
+                return
             }else{
                 CoreDataStackManager.sharedInstance().managedObjectContext.deleteObject(self.vendasOfUser[indexPath.row])
                 
                 self.vendasOfUser.removeAtIndex(indexPath.row)
-                
+                self.overlayView.removeFromSuperview()
                 tableView.reloadData()
             }
             
@@ -171,6 +175,7 @@ class UserTableViewController: UITableViewController {
                         }
                         else
                         {
+                            self.showAlert("Facebook", message: "Internet conection was lost or server is offline!", preferredSytle: UIAlertControllerStyle.Alert)
                             print("error \(error)")
                         }
                     })
@@ -192,6 +197,9 @@ class UserTableViewController: UITableViewController {
     func reloadTableView() {
          tableView.reloadData()
     }
+    
+    func removeAddButton() {
+        self.navItem.rightBarButtonItem = nil    }
     
     func addButton() {
         self.navItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(UserTableViewController.addVenda(_:)))
@@ -225,6 +233,7 @@ class UserTableViewController: UITableViewController {
                 }
                 else
                 {
+                    self.showAlert("Facebook", message: "Internet conection was lost or server is offline!", preferredSytle: UIAlertControllerStyle.Alert)
                     print("error \(error)")
                 }
             })
@@ -234,6 +243,17 @@ class UserTableViewController: UITableViewController {
 
     }
     
-    
+    func loadActivityIndicator(){
+        self.overlayView = UIView(frame: self.tableView.bounds)
+        self.overlayView.backgroundColor = UIColor(red: 250, green: 250, blue: 250, alpha: 0.5)
+        self.activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+        self.activityIndicator.alpha = 1.0;
+        self.activityIndicator.center = self.view.center;
+        self.activityIndicator.hidesWhenStopped = true;
+        self.overlayView.addSubview(activityIndicator)
+        self.tableView.addSubview(overlayView)
+        self.tableView.bringSubviewToFront(overlayView)
+        self.activityIndicator.startAnimating()
+    }
 
 }

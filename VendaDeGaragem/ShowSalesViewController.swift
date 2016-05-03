@@ -35,7 +35,7 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+               
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,6 +44,8 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
     }
     
     override func viewWillAppear(animated: Bool) {
+        mapViewActivityIndicator.hidden = false
+        mapViewActivityIndicator.startAnimating()
         putSalesOnMap()
         verifyIfUserIslogged()
     }
@@ -109,6 +111,7 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
                 }
                 else
                 {
+                    self.showAlert("Facebook", message: "Internet conection was lost or server is offline!", preferredSytle: UIAlertControllerStyle.Alert)
                     print("error \(error)")
                 }
             })
@@ -119,6 +122,11 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
     }
 
     func getVendas(){
+        vendas.removeAll()
+        let annotationsToRemove = mapView.annotations.filter { $0 !== mapView.userLocation }
+        mapView.removeAnnotations( annotationsToRemove )
+        annotations.removeAll()
+        mapView.reloadInputViews()
         vendas = vendaPersistence.buscarVendas()
     }
     
@@ -127,17 +135,16 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
         parseConvenience.gettingVendas({ (networkConectionError) in
             
             if networkConectionError == true{
-                let alert = UIAlertController(title: ":(", message: "Internet conection was lost or server is offline!", preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-                self.presentViewController(alert, animated: true, completion: nil)
+                self.showAlert(":(", message: "Internet conection was lost or server is offline!", preferredSytle: UIAlertControllerStyle.Alert)
+                
                 self.mapViewActivityIndicator.stopAnimating()
-               
                 return
                 
             }else{
                 print(self.vendas)
                 
                 self.getVendas()
+                
                 print(self.vendas)
                 for venda in self.vendas {
                     let annotation = MKPointAnnotation()
@@ -162,7 +169,10 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
         dispatch_async(dispatch_get_main_queue()) { 
             self.mapView.addAnnotations(self.annotations)
             print(self.annotations)
+            self.mapView.reloadInputViews()
         }
+        
+        mapView.reloadInputViews()
         
    
     }
@@ -218,4 +228,3 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
     }
 
 }
-

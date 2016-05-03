@@ -12,8 +12,8 @@ import UIKit
 class ParseConvenience: NSObject {
     
     let client = MSClient(
-        applicationURLString:"https://hoff.azure-mobile.net/",
-        applicationKey:"fuTRPteGDvNoNASjLJwTrcasxSNQZE27"
+        applicationURLString: Constants.BASE_URL,
+        applicationKey: Constants.API_KEY
     )
     
     var vendaPersistence = VendaPersistence()
@@ -51,7 +51,7 @@ class ParseConvenience: NSObject {
         
     }
     
-    func deletarVenda(id_azure: String, onCompletion: (networkConectionError : Bool) ->()) {
+    func deletarVenda(id_azure: String, onCompletion: (networkConectionError : Bool) -> ()) {
         let table = client.tableWithName("Venda")
         table.deleteWithId(id_azure) { (result, error) in
             if (error != nil){
@@ -120,9 +120,10 @@ class ParseConvenience: NSObject {
                 })
                 return
             }else if let itens = result.items{
+                self.vendaPersistence.clearData()
                 if itens.count > 0{
                     print(itens)
-                    self.vendaPersistence.clearData()
+                    
                     for venda in itens{
                         self.vendaPersistence.saveVenda(venda["data"] as! String, latitude: venda["latitude"] as! String, longitude: venda["longitude"] as! String, forma_pagamento: venda["forma_pagamento"] as! String, hora_inicio: venda["hora_inicio"] as! String, hora_termino: venda["hora_termino"] as! String, nome: venda["nome"] as! String, status: venda["status"] as! String, id_facebook: venda["id_facebook"] as! String, id_azure: venda["id"] as! String)
                    // print(VendasSingleton.arrayDeVendas)

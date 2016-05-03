@@ -82,7 +82,7 @@ class DetalhVendaTableViewController: UITableViewController, MKMapViewDelegate {
         var region = MKCoordinateRegion()
         region.center = annotation.coordinate
         mapViewLocalDaVenda.setRegion(region, animated: true)
-        mapViewLocalDaVenda.camera.altitude = 100000
+        mapViewLocalDaVenda.camera.altitude = 500
         mapViewLocalDaVenda.setCenterCoordinate(mapViewLocalDaVenda.region.center, animated: true)
         mapViewLocalDaVenda.addAnnotation(annotation)
     }
@@ -115,9 +115,9 @@ class DetalhVendaTableViewController: UITableViewController, MKMapViewDelegate {
     
     func vendaAceitaCartao() {
         if venda.forma_pagamento == "sim" {
-            labelCartao.text = "Que bom :D! Você poderá pagar com cartão!"
+            labelCartao.text = "Que bom :D! \nVocê poderá pagar com cartão!"
         }else{
-            labelCartao.text = "Que pena :/! Aina não aceitamos cartão!"
+            labelCartao.text = "Que pena :/! \nNão aceitamos cartão!"
         }
     }
     
@@ -126,11 +126,11 @@ class DetalhVendaTableViewController: UITableViewController, MKMapViewDelegate {
     }
     func statusDaVenda() {
         if venda.status == "Confirmada"{
-            labelStatus.text = "Corre! Acho que ainda dá tempo de aproveitar."
+            labelStatus.text = "Corre! \nAinda dá tempo de aproveitar."
         }else if venda.status == "Encerrada"{
             labelStatus.text = "Infelizmente essa venda já foi encerrada ;p!"
         }else{
-            labelStatus.text = "Marque no seu calendário! Essa venda está prevista."
+            labelStatus.text = "Marque no seu calendário! \nEssa venda está prevista."
         }
     }
     
@@ -160,6 +160,7 @@ class DetalhVendaTableViewController: UITableViewController, MKMapViewDelegate {
                 else
                 {
                     print("error \(error)")
+                    self.showAlert("Facebook", message: "Internet conection was lost or server is offline!", preferredSytle: UIAlertControllerStyle.Alert)
                 }
             })
             
@@ -185,7 +186,7 @@ class DetalhVendaTableViewController: UITableViewController, MKMapViewDelegate {
         if segue.identifier == "editarVenda"{
             let editarVenda : AddSaleTableViewController = segue.destinationViewController as! AddSaleTableViewController
             editarVenda.venda = venda
-            print("Detalhou!")
+            print("Detalhou: \(venda)")
         }
     }
 

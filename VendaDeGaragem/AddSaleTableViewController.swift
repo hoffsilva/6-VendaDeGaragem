@@ -17,17 +17,18 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
     var statusVenda = [String]()
     var statusSelected = "Confirmada"
     var idOfUser = ""
-    var locationManager: CLLocationManager!
+    
+    var table = UserTableViewController()
+    
     
     var overlayView = UIView()
+    
     var activityIndicator = UIActivityIndicatorView()
+    
     var coordinates = CLLocationCoordinate2D()
     var vendaPersistence = VendaPersistence()
     var venda : Vendas!
-    
-
-    
-    //let myRootRef = Firebase(url:"https://vendadegaragem.firebaseio.com")
+    var locationManager: CLLocationManager!
     let parse = ParseConvenience()
 
     @IBAction func cancelar(sender: AnyObject) {
@@ -43,25 +44,30 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
     @IBOutlet weak var pickerStatus: UIPickerView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         locationManager = CLLocationManager()
+        locationManager.delegate = self
+//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+//        locationManagers(locationManager, didChangeAuthorizationStatus: .NotDetermined)
+        //locationManager.requestAlwaysAuthorization()
+        locationManager.startUpdatingLocation()
+        
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard)))
         if verifyIfIsUpdate(){
             textFieldNome.text = venda.nome!
         }
         
        
-        
+//        print(locationManager.location?.coordinate.latitude)
         statusVenda = ["Confirmada", "Prevista", "Encerrada"]
-        self.locationManager.delegate = self
-        
-       // self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-       // self.locationManager.requestAlwaysAuthorization()
-        //self.locationManager.startUpdatingLocation()
+//        
+//        coordinates = (locationManager.location?.coordinate)!
+        print(coordinates)
     }
     
     override func viewWillAppear(animated: Bool) {
         getFacebookId()
-        locationManagers(locationManager, didChangeAuthorizationStatus: .NotDetermined)
+        //locationManagers(locationManager, didChangeAuthorizationStatus: .NotDetermined)
     }
     
     func locationManagers(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
@@ -69,15 +75,16 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
         case .NotDetermined:
             // If status has not yet been determied, ask for authorization
             manager.requestWhenInUseAuthorization()
-            coordinates = getCoordinates()
             break
         case .AuthorizedWhenInUse:
             // If authorized when in use
             manager.startUpdatingLocation()
+            
             break
         case .AuthorizedAlways:
             // If always authorized
             manager.startUpdatingLocation()
+            
             break
         case .Restricted:
             // If restricted by e.g. parental controls. User can't enable Location Services
@@ -114,50 +121,80 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
     }
     
     func saveSale() {
-    
-        print(formataData(datePickerData), String(coordinates.latitude), String(coordinates.longitude),  getCard(),  formataHora(datePickerHoraInicio),  formataHora(datePickerHoraTermino), textFieldNome.text!,  statusSelected ,  idOfUser)
-        parse.saveVenda(formataData(datePickerData), latitude: String(coordinates.latitude), longitude: String(coordinates.longitude), forma_pagamento: getCard(), hora_inicio: formataHora(datePickerHoraInicio), hora_termino: formataHora(datePickerHoraTermino), nome: textFieldNome.text!, status: statusSelected , id: idOfUser) { (networkConectionError) in
+        
+        print("\(formataData(datePickerData)) \n \(String(self.locationManager.location!.coordinate.latitude))\n \(String(self.locationManager.location!.coordinate.longitude))\n \(getCard())\n \(formataHora(datePickerHoraInicio))\n \(formataHora(datePickerHoraTermino))\n \(textFieldNome.text!)\n \(statusSelected)\n \(idOfUser)")
+            var ltd = locationManager.location!.coordinate.latitude
+            var lgt = locationManager.location!.coordinate.longitude
+        
+            print("Longitude: \(ltd)")
+            print("Longitude: \(lgt)")
+            loadActivityIndicator()
+            parse.saveVenda(formataData(datePickerData), latitude: String(self.locationManager.location!.coordinate.latitude), longitude: String(self.locationManager.location!.coordinate.longitude), forma_pagamento: getCard(), hora_inicio: formataHora(datePickerHoraInicio), hora_termino: formataHora(datePickerHoraTermino), nome: textFieldNome.text!, status: statusSelected , id: idOfUser) { (networkConectionError) in
             
             if networkConectionError == true{
-                let alert = UIAlertController(title: ":(", message: "Internet conection was lost or server is offline!", preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-                self.presentViewController(alert, animated: true, completion: nil)
+                self.overlayView.removeFromSuperview()
+                self.showAlert(":(", message: "Internet conection was lost or server is offline!", preferredSytle: UIAlertControllerStyle.Alert)
             }else{
-                self.vendaPersistence.saveVenda(self.formataData(self.datePickerData), latitude: String(self.coordinates.latitude), longitude: String(self.coordinates.longitude), forma_pagamento: self.getCard(), hora_inicio: self.formataHora(self.datePickerHoraInicio), hora_termino: self.formataHora(self.datePickerHoraTermino), nome: self.textFieldNome.text!, status: self.statusSelected, id_facebook: self.idOfUser, id_azure: self.venda.id_azure)
                 
-                self.dismissViewControllerAnimated(true, completion: nil)
+                self.vendaPersistence.saveVenda(self.formataData(self.datePickerData), latitude: String(ltd), longitude: String(lgt), forma_pagamento: self.getCard(), hora_inicio: self.formataHora(self.datePickerHoraInicio), hora_termino: self.formataHora(self.datePickerHoraTermino), nome: self.textFieldNome.text!, status: self.statusSelected, id_facebook: self.idOfUser, id_azure: "")
+               
+                self.parse.gettingVendas({ (networkConectionError) in
+                    print("Ok!")
+                    self.overlayView.removeFromSuperview()
+                    self.table.vendasOfUser(self.idOfUser)
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                  
+                })
+                
+               
+                
+                
+               
             }
         }
         
     }
     
     func updateSale() {
+        loadActivityIndicator()
+        var ltd = locationManager.location!.coordinate.latitude
+        var lgt = locationManager.location!.coordinate.longitude
         
-        parse.atualizarVenda(formataData(datePickerData), latitude: String(coordinates.latitude), longitude: String(coordinates.longitude), forma_pagamento: getCard(), hora_inicio: formataHora(datePickerHoraInicio), hora_termino: formataHora(datePickerHoraTermino), nome: textFieldNome.text!, status: statusSelected, id_facebook: idOfUser, id_azure: venda.id_azure) { (networkConectionError) in
+        print("Longitude: \(ltd)")
+        print("Longitude: \(lgt)")
+        parse.atualizarVenda(formataData(datePickerData), latitude: String(ltd), longitude: String(lgt), forma_pagamento: getCard(), hora_inicio: formataHora(datePickerHoraInicio), hora_termino: formataHora(datePickerHoraTermino), nome: textFieldNome.text!, status: statusSelected, id_facebook: idOfUser, id_azure: venda.id_azure) { (networkConectionError) in
             if networkConectionError == true{
-                let alert = UIAlertController(title: ":(", message: "Internet conection was lost or server is offline!", preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-                self.presentViewController(alert, animated: true, completion: nil)
+                self.overlayView.removeFromSuperview()
+                self.showAlert(":(", message: "Internet conection was lost or server is offline!", preferredSytle: UIAlertControllerStyle.Alert)
+                AddSaleTableViewController().dismissViewControllerAnimated(true, completion: nil)
             }else{
                 let objectVenda = self.vendaPersistence.vendaPorIdAzure(self.venda.id_azure)
-                objectVenda[0].data = self.formataData(self.datePickerData)
-                objectVenda[0].latitude = String(self.coordinates.latitude)
-                objectVenda[0].longitude = String(self.coordinates.longitude)
-                objectVenda[0].forma_pagamento = self.formataHora(self.datePickerHoraInicio)
-                objectVenda[0].hora_inicio = self.formataHora(self.datePickerHoraTermino)
-                objectVenda[0].hora_termino = self.formataHora(self.datePickerHoraInicio)
-                objectVenda[0].nome = self.textFieldNome.text!
-                objectVenda[0].status = self.statusSelected
-                objectVenda[0].id_facebook = self.idOfUser
-              //  objectVenda[0].id_azure = self.venda.id_azure
+                let obj = objectVenda[0] as NSManagedObject
+
+                obj.setValue(self.formataData(self.datePickerData), forKey: "data")
+                obj.setValue(String(self.coordinates.latitude), forKey: "latitude")
+                obj.setValue(String(self.coordinates.longitude), forKey: "longitude")
+                obj.setValue(self.getCard(), forKey: "forma_pagamento")
+                obj.setValue(self.formataHora(self.datePickerHoraInicio), forKey: "hora_inicio")
+                obj.setValue(self.formataHora(self.datePickerHoraTermino), forKey: "hora_termino")
+                obj.setValue(self.statusSelected, forKey: "status")
+                obj.setValue(self.textFieldNome.text!, forKey: "nome")
                 
-               // CoreDataStackManager.sharedInstance().saveContext()
+                do{
+                    try obj.managedObjectContext?.save()
+                }catch{
+                    let saveError = error as NSError
+                    print(saveError)
+                }
                 
                 self.parse.gettingVendas({ (networkConectionError) in
                     print("Ok!")
+                    self.overlayView.removeFromSuperview()
+                    
+                    self.dismissViewControllerAnimated(true, completion: nil)
                 })
                 
-                self.dismissViewControllerAnimated(true, completion: nil)
+                //self.dismissViewControllerAnimated(true, completion: nil)
                 
             }
         }
@@ -260,15 +297,13 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
             else
             {
                 print("error \(error)")
+                self.showAlertErrorFacebook("Facebook", message: "Internet conection was lost or server is offline!", preferredSytle: UIAlertControllerStyle.Alert)
+                self.dismissViewControllerAnimated(true, completion: nil)
             }
         })
     }
     
-    func getCoordinates() -> CLLocationCoordinate2D {
-        //locationManager.requestLocation()
-        print(locationManager.location?.coordinate)
-        return (locationManager.location?.coordinate)!
-    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -302,6 +337,19 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         statusSelected = statusVenda[row]
+    }
+    
+    func loadActivityIndicator(){
+        self.overlayView = UIView(frame: self.tableView.bounds)
+        self.overlayView.backgroundColor = UIColor(red: 250, green: 250, blue: 250, alpha: 0.5)
+        self.activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+        self.activityIndicator.alpha = 1.0;
+        self.activityIndicator.center = self.view.center;
+        self.activityIndicator.hidesWhenStopped = true;
+        self.overlayView.addSubview(activityIndicator)
+        self.tableView.addSubview(overlayView)
+        self.tableView.bringSubviewToFront(overlayView)
+        self.activityIndicator.startAnimating()
     }
 
 }

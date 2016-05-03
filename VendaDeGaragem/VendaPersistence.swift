@@ -127,6 +127,8 @@ class VendaPersistence: NSObject, NSFetchedResultsControllerDelegate {
 
     }
     
+    
+    
     func vendaPorIdAzure(id_azure: String) -> [Vendas] {
         let requsicaoDeBusca = NSFetchRequest(entityName: "Vendas")
         
@@ -142,6 +144,7 @@ class VendaPersistence: NSObject, NSFetchedResultsControllerDelegate {
         }
         return []
     }
+    
     
     
     func saveVenda(data: String, latitude: String, longitude: String, forma_pagamento: String, hora_inicio: String, hora_termino: String, nome: String, status: String , id_facebook: String, id_azure: String ) -> Vendas {
