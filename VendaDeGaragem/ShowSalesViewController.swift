@@ -179,9 +179,9 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
         btn_photoAlbum.addTarget(self, action: "detalharVenda", forControlEvents: .TouchUpInside)
         
         pinView!.canShowCallout = true
-        if annotation.title! == "Confirmada" {
+        if annotation.subtitle! == "Confirmada" {
             pinView!.image = UIImage(named:"confirmada")!
-        }else if annotation.title! == "Prevista"{
+        }else if annotation.subtitle! == "Prevista"{
             pinView!.image = UIImage(named:"prevista")!
         }else{
             pinView!.image = UIImage(named:"encerrada")!

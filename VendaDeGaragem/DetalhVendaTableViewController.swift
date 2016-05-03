@@ -99,14 +99,15 @@ class DetalhVendaTableViewController: UITableViewController, MKMapViewDelegate {
             pinView!.annotation = annotation
         }
         
-        if venda.status == "Iniciada"{
-            pinView!.image = UIImage(named:"facebookOnline")!
+        if venda.status == "Confirmada"{
+            pinView!.image = UIImage(named:"confirmada")!
             pinView!.centerOffset = CGPoint(x: -1, y: -12)
         }else if venda.status == "Encerrada"{
-            pinView!.image = UIImage(named:"facebookOffline")!
+            pinView!.image = UIImage(named:"encerrada")!
             pinView!.centerOffset = CGPoint(x: -1, y: -12)
         }else{
-            print("outro")
+            pinView!.image = UIImage(named:"prevista")!
+            pinView!.centerOffset = CGPoint(x: -1, y: -12)
         }
         
         return pinView
