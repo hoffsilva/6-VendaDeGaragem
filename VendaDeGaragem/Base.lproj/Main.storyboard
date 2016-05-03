@@ -42,7 +42,7 @@
                             <constraint firstItem="RCt-6V-uys" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="20" id="z3O-Ed-djg"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" id="z1y-87-Hqz"/>
+                    <tabBarItem key="tabBarItem" title="" selectedImage="map" id="z1y-87-Hqz"/>
                     <navigationItem key="navigationItem" id="zdi-tj-tuJ"/>
                     <connections>
                         <outlet property="mapView" destination="X2h-lU-c1O" id="wCV-JA-PZm"/>
@@ -372,11 +372,11 @@
             </objects>
             <point key="canvasLocation" x="1996" y="1137"/>
         </scene>
-        <!--Item-->
+        <!--Navigation Controller-->
         <scene sceneID="8iX-Ez-wE3">
             <objects>
                 <navigationController id="Yyf-Ot-Pcw" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="rxf-hP-830"/>
+                    <tabBarItem key="tabBarItem" title="" selectedImage="map" id="rxf-hP-830"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="BsK-9f-AUu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -687,11 +687,11 @@
             </objects>
             <point key="canvasLocation" x="-1543" y="932"/>
         </scene>
-        <!--Item-->
+        <!--Navigation Controller-->
         <scene sceneID="bCp-pl-kMJ">
             <objects>
                 <navigationController id="b3i-Av-En0" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="w0Z-Uf-Ga4"/>
+                    <tabBarItem key="tabBarItem" title="" selectedImage="map" id="w0Z-Uf-Ga4"/>
                     <navigationBar key="navigationBar" hidden="YES" contentMode="scaleToFill" id="pe2-t3-raM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -725,6 +725,7 @@
     </scenes>
     <resources>
         <image name="facebookOnline" width="22" height="22"/>
+        <image name="map" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Wcm-Py-tXX"/>

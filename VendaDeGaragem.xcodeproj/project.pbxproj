@@ -175,6 +175,11 @@
 					0BEDDEBD1CB59DE000F04FE9 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = C434CHPZ37;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};

@@ -180,11 +180,11 @@ class ShowSalesViewController: UIViewController, MKMapViewDelegate {
         
         pinView!.canShowCallout = true
         if annotation.title! == "Confirmada" {
-            pinView!.image = UIImage(named:"facebookOnline")!
+            pinView!.image = UIImage(named:"confirmada")!
         }else if annotation.title! == "Prevista"{
-            pinView!.image = UIImage(named:"detail")!
+            pinView!.image = UIImage(named:"prevista")!
         }else{
-            pinView!.image = UIImage(named:"facebookOffline")!
+            pinView!.image = UIImage(named:"encerrada")!
         }
         
         pinView!.rightCalloutAccessoryView = btn_photoAlbum

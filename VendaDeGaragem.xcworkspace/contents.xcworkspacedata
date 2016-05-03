@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:VendaDeGaragem.xcodeproj">
+      location = "group:/Users/HoffSilva/Google Drive/Udacity/iOS Apps/GitHub Projects/6-VendaDeGaragem/VendaDeGaragem.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
