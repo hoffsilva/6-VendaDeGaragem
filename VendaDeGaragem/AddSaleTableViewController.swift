@@ -47,9 +47,6 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
         
         locationManager = CLLocationManager()
         locationManager.delegate = self
-//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-//        locationManagers(locationManager, didChangeAuthorizationStatus: .NotDetermined)
-        //locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
         
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard)))
@@ -57,17 +54,13 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
             textFieldNome.text = venda.nome!
         }
         
-       
-//        print(locationManager.location?.coordinate.latitude)
         statusVenda = ["Confirmada", "Prevista", "Encerrada"]
-//        
-//        coordinates = (locationManager.location?.coordinate)!
         print(coordinates)
     }
     
     override func viewWillAppear(animated: Bool) {
         getFacebookId()
-        //locationManagers(locationManager, didChangeAuthorizationStatus: .NotDetermined)
+       
     }
     
     func locationManagers(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
@@ -122,7 +115,16 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
     
     func saveSale() {
         
-        print("\(formataData(datePickerData)) \n \(String(self.locationManager.location!.coordinate.latitude))\n \(String(self.locationManager.location!.coordinate.longitude))\n \(getCard())\n \(formataHora(datePickerHoraInicio))\n \(formataHora(datePickerHoraTermino))\n \(textFieldNome.text!)\n \(statusSelected)\n \(idOfUser)")
+        print("\(formataData(datePickerData)) \n")
+        print("\(String(self.locationManager.location!.coordinate.latitude))\n")
+        print("\(String(self.locationManager.location!.coordinate.longitude))\n")
+        print("\(getCard())\n")
+        print("\(formataHora(datePickerHoraInicio))\n")
+        print("\(formataHora(datePickerHoraTermino))\n")
+        print("\(textFieldNome.text!)\n")
+        print("\(statusSelected)\n")
+        print("\(idOfUser)")
+        
             var ltd = locationManager.location!.coordinate.latitude
             var lgt = locationManager.location!.coordinate.longitude
         
