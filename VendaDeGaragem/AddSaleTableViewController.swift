@@ -115,15 +115,15 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
     
     func saveSale() {
         
-        print("\(formataData(datePickerData)) \n")
-        print("\(String(self.locationManager.location!.coordinate.latitude))\n")
-        print("\(String(self.locationManager.location!.coordinate.longitude))\n")
-        print("\(getCard())\n")
-        print("\(formataHora(datePickerHoraInicio))\n")
-        print("\(formataHora(datePickerHoraTermino))\n")
-        print("\(textFieldNome.text!)\n")
-        print("\(statusSelected)\n")
-        print("\(idOfUser)")
+//        print("\(formataData(datePickerData)) \n")
+//        print("\(String(self.locationManager.location!.coordinate.latitude))\n")
+//        print("\(String(self.locationManager.location!.coordinate.longitude))\n")
+//        print("\(getCard())\n")
+//        print("\(formataHora(datePickerHoraInicio))\n")
+//        print("\(formataHora(datePickerHoraTermino))\n")
+//        print("\(textFieldNome.text!)\n")
+//        print("\(statusSelected)\n")
+//        print("\(idOfUser)")
         
             var ltd = locationManager.location!.coordinate.latitude
             var lgt = locationManager.location!.coordinate.longitude
