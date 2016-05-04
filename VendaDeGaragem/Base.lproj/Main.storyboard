@@ -651,6 +651,7 @@
                         <outlet property="datePickerHoraInicio" destination="q17-Xf-6np" id="rGV-uU-15L"/>
                         <outlet property="datePickerHoraTermino" destination="riC-VB-mPg" id="mRP-sI-Xbg"/>
                         <outlet property="pickerStatus" destination="HXk-Lg-jCE" id="tCQ-Kd-v1z"/>
+                        <outlet property="publishButton" destination="yjy-2g-XLK" id="Zv4-iu-LHb"/>
                         <outlet property="textFieldNome" destination="cq5-ZR-h9x" id="cNm-Ce-BMr"/>
                     </connections>
                 </tableViewController>

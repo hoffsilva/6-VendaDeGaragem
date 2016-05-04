@@ -31,6 +31,7 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
     var locationManager: CLLocationManager!
     let parse = ParseConvenience()
 
+    @IBOutlet weak var publishButton: UIButton!
     @IBAction func cancelar(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -47,7 +48,9 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
         
         locationManager = CLLocationManager()
         locationManager.delegate = self
+        
         locationManager.startUpdatingLocation()
+       
         
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard)))
         if verifyIfIsUpdate(){
@@ -55,6 +58,7 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
         }
         
         statusVenda = ["Confirmada", "Prevista", "Encerrada"]
+        //coordinates = locationManager.location!.coordinate
         print(coordinates)
     }
     
@@ -63,7 +67,13 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
        
     }
     
-    func locationManagers(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        showAlert("Current Location Not Available", message: "Your current locantion can not be determined at this time.", preferredSytle: UIAlertControllerStyle.Alert)
+        publishButton.enabled = false
+        publishButton.backgroundColor = UIColor.lightGrayColor()
+    }
+    
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         switch status {
         case .NotDetermined:
             // If status has not yet been determied, ask for authorization
@@ -115,15 +125,15 @@ class AddSaleTableViewController: UITableViewController, UITextFieldDelegate, UI
     
     func saveSale() {
         
-//        print("\(formataData(datePickerData)) \n")
-//        print("\(String(self.locationManager.location!.coordinate.latitude))\n")
-//        print("\(String(self.locationManager.location!.coordinate.longitude))\n")
-//        print("\(getCard())\n")
-//        print("\(formataHora(datePickerHoraInicio))\n")
-//        print("\(formataHora(datePickerHoraTermino))\n")
-//        print("\(textFieldNome.text!)\n")
-//        print("\(statusSelected)\n")
-//        print("\(idOfUser)")
+        print("\(formataData(datePickerData)) \n")
+        print("\(getCard())\n")
+        print("\(String(self.locationManager.location!.coordinate.latitude))\n")
+        print("\(String(self.locationManager.location!.coordinate.longitude))\n")
+        print("\(formataHora(datePickerHoraInicio))\n")
+        print("\(formataHora(datePickerHoraTermino))\n")
+        print("\(textFieldNome.text!)\n")
+        print("\(statusSelected)\n")
+        print("\(idOfUser)")
         
             var ltd = locationManager.location!.coordinate.latitude
             var lgt = locationManager.location!.coordinate.longitude
